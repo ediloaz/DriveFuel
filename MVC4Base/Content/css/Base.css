@@ -1,0 +1,93 @@
+﻿@font-face {
+	font-family: DYLOVASTUFF;
+    src: url(/fonts/DYLOVASTUFF.ttf);
+}
+
+#loadingImage
+{
+	font-size: 8em;
+}
+#logoutForm {
+	display: inline-block;
+}
+#page-content
+{
+	padding-top: 0 !important;
+}
+#password-change-container {
+	background-color: inherit;
+}
+.breadcrumb
+{
+	float: right;
+}
+.btn-labeled
+{
+	font-size: 1em !important;
+}
+.btn-xl
+{
+	font-size: 19px;
+}
+.btn-xl > i.fa
+{
+	font-weight: bold !important;
+}
+.brand-text
+{
+	text-align: center;	
+}
+.brand-title
+{
+    font-family: 'DYLOVASTUFF';
+}
+.check
+{
+	font-size: 1.2em;
+}
+td.child > ul > li
+{
+	width: 100%;
+}
+td.child > ul > li > span.dtr-title
+{
+	font-weight: bold !important;
+}
+td.child > ul > li > span
+{
+    display: table-cell;
+}
+.form-control
+{
+	font-size: 1em;
+}
+.icon-action
+{
+    margin: 0 5px;	
+}
+.panel-body > div.table > div.row {
+    border-bottom: 1px solid;
+    padding: 7px 0;
+}
+.panel-footer > div.row > div
+{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+@media (min-width: @screen-sm-min)
+{
+	.panel-footer > div.row > div
+	{
+		margin-bottom: 1px;
+    	margin-top: 1px;
+	}
+}
+.table-actions
+{
+	text-align: right;
+}
+.table-actions > div.footable-row-detail-value > *
+{
+	padding: 0 7px;
+    font-size: 1.5em;
+}

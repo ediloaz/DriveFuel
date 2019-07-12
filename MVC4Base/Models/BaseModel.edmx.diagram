@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f572e2b13d634d1c919292b146135a72" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="BaseModel.Conceptos" Width="1.5" PointX="2.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Estatus" Width="1.5" PointX="5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Parametros" Width="1.5" PointX="9" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.Usuarios" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.webpages_Membership" Width="2.375" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseModel.webpages_Roles" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="BaseModel.FK_Conceptos_Estatus" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseModel.webpages_UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BaseModel.webpages_Acciones" Width="1.5" PointX="5.375" PointY="12.125" />
+        <AssociationConnector Association="BaseModel.webpages_AccionesInRoles" />
+        <AssociationConnector Association="BaseModel.webpages_Roles_Admin_Users" />
+        <EntityTypeShape EntityType="BaseModel.Ruta" Width="1.5" PointX="7.375" PointY="4.5" />
+        <EntityTypeShape EntityType="BaseModel.RutaCheckpoint" Width="1.5" PointX="9.625" PointY="4" />
+        <AssociationConnector Association="BaseModel.FK_RutaCheckpoint_Ruta" />
+        <AssociationConnector Association="BaseModel.RutaUsuarios" />
+        <EntityTypeShape EntityType="BaseModel.Grupo" Width="1.5" PointX="0.875" PointY="4.75" />
+        <AssociationConnector Association="BaseModel.GrupoMiembros" />
+        <AssociationConnector Association="BaseModel.RutaGrupos" />
+        <EntityTypeShape EntityType="BaseModel.CheckIn" Width="1.5" PointX="11.875" PointY="2.5" />
+        <AssociationConnector Association="BaseModel.FK_CheckIn_RutaCheckpoint" />
+        <AssociationConnector Association="BaseModel.FK_CheckIn_Usuarios" />
+        <EntityTypeShape EntityType="BaseModel.Forma" Width="1.5" PointX="4.375" PointY="8.125" />
+        <EntityTypeShape EntityType="BaseModel.FormaPregunta" Width="1.5" PointX="6.625" PointY="7.875" />
+        <EntityTypeShape EntityType="BaseModel.FormaPreguntaOpcion" Width="1.5" PointX="8.875" PointY="8" />
+        <AssociationConnector Association="BaseModel.FK_FormaPregunta_Forma" />
+        <AssociationConnector Association="BaseModel.FK_FormaPreguntaOpcion_FormaPregunta" />
+        <AssociationConnector Association="BaseModel.RutaForma" />
+        <EntityTypeShape EntityType="BaseModel.Conversacion" Width="1.5" PointX="2.75" PointY="11" />
+        <EntityTypeShape EntityType="BaseModel.Mensaje" Width="1.5" PointX="9" PointY="10.625" />
+        <EntityTypeShape EntityType="BaseModel.VistaGrupo" Width="1.5" PointX="12.25" PointY="6" />
+        <AssociationConnector Association="BaseModel.FK_Conversacion_Usuarios" />
+        <AssociationConnector Association="BaseModel.FK_Conversacion_Usuarios1" />
+        <AssociationConnector Association="BaseModel.FK_Mensaje_Conversacion" />
+        <AssociationConnector Association="BaseModel.FK_Mensaje_Usuarios" />
+        <AssociationConnector Association="BaseModel.FK_VistaGrupo_VistaGrupo" />
+        <AssociationConnector Association="BaseModel.FK_VistaGrupo_Usuarios" />
+        <AssociationConnector Association="BaseModel.ConversacionUsuarios" />
+        <EntityTypeShape EntityType="BaseModel.FormaRespuesta" Width="1.5" PointX="15" PointY="3.875" />
+        <EntityTypeShape EntityType="BaseModel.FormaRespuestaDetalle" Width="1.5" PointX="17.25" PointY="6" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuesta_Forma" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuestaDetalle_FormaPregunta" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuestaDetalle_FormaPreguntaOpcion" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuesta_RutaCheckpoint" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuesta_Usuarios" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuestaDetalle_FormaRespuesta" />
+        <EntityTypeShape EntityType="BaseModel.FormaRespuestaDetalle2" Width="1.5" PointX="17.25" PointY="9.125" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuestaDetalle2_FormaPregunta" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuestaDetalle2_FormaPreguntaOpcion" />
+        <AssociationConnector Association="BaseModel.FK_FormaRespuestaDetalle2_FormaRespuesta" />
+        <EntityTypeShape EntityType="BaseModel.TipoNoticia" Width="1.5" PointX="11.375" PointY="9.375" />
+        <EntityTypeShape EntityType="BaseModel.Noticias" Width="1.5" PointX="13.625" PointY="8.75" />
+        <AssociationConnector Association="BaseModel.FK_Noticias_TipoNoticia" />
+        <EntityTypeShape EntityType="BaseModel.CapacitacionTema" Width="1.5" PointX="1.5" PointY="22.875" />
+        <EntityTypeShape EntityType="BaseModel.CapacitacionVisitas" Width="1.5" PointX="7" PointY="0.625" />
+        <AssociationConnector Association="BaseModel.RefUsuarios50" />
+        <EntityTypeShape EntityType="BaseModel.CapacitacionArchivos" Width="1.5" PointX="3.75" PointY="22.75" />
+        <AssociationConnector Association="BaseModel.RefCapacitacionArchivos49" />
+        <AssociationConnector Association="BaseModel.RefCapacitacionTema48" />
+        <EntityTypeShape EntityType="BaseModel.Capacitacion" Width="1.5" PointX="0.75" PointY="13.75" />
+        <AssociationConnector Association="BaseModel.RefCapacitacion47" />
+        <AssociationConnector Association="BaseModel.CapacitacionGrupo" />
+        <EntityTypeShape EntityType="BaseModel.Notificaciones" Width="1.5" PointX="2.75" PointY="17.75" />
+        <AssociationConnector Association="BaseModel.FK_Notificaciones_Usuarios" />
+        <EntityTypeShape EntityType="BaseModel.Cliente" Width="1.5" PointX="0.75" PointY="6.875" />
+        <EntityTypeShape EntityType="BaseModel.Producto" Width="1.5" PointX="3" PointY="6.75" />
+        <AssociationConnector Association="BaseModel.FK_Forma_Cliente" />
+        <AssociationConnector Association="BaseModel.FK_Grupo_Cliente" />
+        <AssociationConnector Association="BaseModel.FK_Producto_Cliente" />
+        <AssociationConnector Association="BaseModel.FK_Ruta_Cliente" />
+        <AssociationConnector Association="BaseModel.FK_Forma_Producto" />
+        <AssociationConnector Association="BaseModel.FK_Grupo_Producto" />
+        <AssociationConnector Association="BaseModel.FK_Ruta_Producto" />
+        <AssociationConnector Association="BaseModel.NoticiasGrupo" />
+        <EntityTypeShape EntityType="BaseModel.UsuariosAcceso" Width="1.5" PointX="13.75" PointY="0.75" />
+        <AssociationConnector Association="BaseModel.FK_UsuariosAcceso_Cliente" />
+        <AssociationConnector Association="BaseModel.FK_UsuariosAcceso_Producto" />
+        <AssociationConnector Association="BaseModel.FK_UsuariosAcceso_Usuarios" />
+        <AssociationConnector Association="BaseModel.FK_UsuariosAcceso_Usuarios1" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

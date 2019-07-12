@@ -1,0 +1,2922 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Capacitacion">
+          <Key>
+            <PropertyRef Name="idCapacitacion" />
+          </Key>
+          <Property Name="idCapacitacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCapacitacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CapacitacionArchivos">
+          <Key>
+            <PropertyRef Name="idCapacitacionArchivos" />
+          </Key>
+          <Property Name="idCapacitacionArchivos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTemaCapacitacion" Type="int" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="URL" Type="varchar(max)" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CapacitacionGrupo">
+          <Key>
+            <PropertyRef Name="idCapacitacion" />
+            <PropertyRef Name="idGrupo" />
+          </Key>
+          <Property Name="idCapacitacion" Type="int" Nullable="false" />
+          <Property Name="idGrupo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CapacitacionTema">
+          <Key>
+            <PropertyRef Name="idTemaCapacitacion" />
+          </Key>
+          <Property Name="idTemaCapacitacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCapacitacion" Type="int" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CapacitacionVisitas">
+          <Key>
+            <PropertyRef Name="idCapacitacionVisitas" />
+          </Key>
+          <Property Name="idCapacitacionVisitas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaVisita" Type="datetime" Nullable="false" />
+          <Property Name="idCapacitacionArchivos" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CheckIn">
+          <Key>
+            <PropertyRef Name="idCheckin" />
+          </Key>
+          <Property Name="idCheckin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idCheckpoint" Type="int" Nullable="false" />
+          <Property Name="Latitud" Type="float" Nullable="false" />
+          <Property Name="Longitud" Type="float" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="EsEntrada" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Logo" Type="varchar" MaxLength="300" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conceptos">
+          <Key>
+            <PropertyRef Name="idConcepto" />
+          </Key>
+          <Property Name="idConcepto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Conversacion">
+          <Key>
+            <PropertyRef Name="idConversacion" />
+          </Key>
+          <Property Name="idConversacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idUsuarioInvitado" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Grupal" Type="bit" Nullable="false" />
+          <Property Name="UltimoMensaje" Type="varchar" MaxLength="250" />
+          <Property Name="UltimoFecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ConversacionUsuarios">
+          <Key>
+            <PropertyRef Name="idConversacion" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idConversacion" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estatus">
+          <Key>
+            <PropertyRef Name="idEstatus" />
+          </Key>
+          <Property Name="idEstatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idConcepto" Type="int" Nullable="false" />
+          <Property Name="ClaveInterna" Type="varchar" MaxLength="20" />
+          <Property Name="ClaveExterna" Type="varchar" MaxLength="20" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Forma">
+          <Key>
+            <PropertyRef Name="IdForma" />
+          </Key>
+          <Property Name="IdForma" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="idProducto" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormaPregunta">
+          <Key>
+            <PropertyRef Name="idFormaPregunta" />
+          </Key>
+          <Property Name="idFormaPregunta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idForma" Type="int" Nullable="false" />
+          <Property Name="Pregunta" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormaPreguntaOpcion">
+          <Key>
+            <PropertyRef Name="idFormaPreguntaOpcion" />
+          </Key>
+          <Property Name="idFormaPreguntaOpcion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idFormaPregunta" Type="int" Nullable="false" />
+          <Property Name="Opcion" Type="varchar" MaxLength="90" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormaRespuesta">
+          <Key>
+            <PropertyRef Name="idFormaRespuesta" />
+          </Key>
+          <Property Name="idFormaRespuesta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idForma" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="idRutaCheckpoint" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormaRespuestaDetalle">
+          <Key>
+            <PropertyRef Name="idFormaRespuesta" />
+            <PropertyRef Name="idFormaPregunta" />
+          </Key>
+          <Property Name="idFormaRespuesta" Type="int" Nullable="false" />
+          <Property Name="idFormaPregunta" Type="int" Nullable="false" />
+          <Property Name="idFormaPreguntaOpcion" Type="int" />
+          <Property Name="Respuesta" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormaRespuestaDetalle2">
+          <Key>
+            <PropertyRef Name="idFormaRespuesta" />
+            <PropertyRef Name="idFormaPregunta" />
+            <PropertyRef Name="idFormaPreguntaOpcion" />
+          </Key>
+          <Property Name="idFormaRespuesta" Type="int" Nullable="false" />
+          <Property Name="idFormaPregunta" Type="int" Nullable="false" />
+          <Property Name="idFormaPreguntaOpcion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="idGrupo" />
+          </Key>
+          <Property Name="idGrupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="idProducto" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GrupoMiembros">
+          <Key>
+            <PropertyRef Name="idGrupo" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idGrupo" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="idMensaje" />
+          </Key>
+          <Property Name="idMensaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idConversacion" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="Mensaje" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaVisto" Type="datetime" />
+          <Property Name="Visto" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Noticias">
+          <Key>
+            <PropertyRef Name="idNoticia" />
+          </Key>
+          <Property Name="idNoticia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mensaje" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="Imagen" Type="varchar(max)" />
+          <Property Name="idTipoNoticia" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Activa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NoticiasGrupo">
+          <Key>
+            <PropertyRef Name="idNoticia" />
+            <PropertyRef Name="idGrupo" />
+          </Key>
+          <Property Name="idNoticia" Type="int" Nullable="false" />
+          <Property Name="idGrupo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notificaciones">
+          <Key>
+            <PropertyRef Name="idNotificacion" />
+          </Key>
+          <Property Name="idNotificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mensaje" Type="varchar(max)" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parametros">
+          <Key>
+            <PropertyRef Name="idParametro" />
+          </Key>
+          <Property Name="idParametro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Valor" Type="text" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreProducto" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ruta">
+          <Key>
+            <PropertyRef Name="idRuta" />
+          </Key>
+          <Property Name="idRuta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="90" Nullable="false" />
+          <Property Name="idProducto" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RutaCheckpoint">
+          <Key>
+            <PropertyRef Name="idRutaCheckPoint" />
+          </Key>
+          <Property Name="idRutaCheckPoint" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRuta" Type="int" Nullable="false" />
+          <Property Name="Latitud" Type="float" Nullable="false" />
+          <Property Name="Longitud" Type="float" Nullable="false" />
+          <Property Name="Lugar" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Llegada" Type="datetime" Nullable="false" />
+          <Property Name="Salida" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RutaForma">
+          <Key>
+            <PropertyRef Name="idRuta" />
+            <PropertyRef Name="idForma" />
+          </Key>
+          <Property Name="idRuta" Type="int" Nullable="false" />
+          <Property Name="idForma" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RutaGrupos">
+          <Key>
+            <PropertyRef Name="idRuta" />
+            <PropertyRef Name="idGrupo" />
+          </Key>
+          <Property Name="idRuta" Type="int" Nullable="false" />
+          <Property Name="idGrupo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RutaUsuarios">
+          <Key>
+            <PropertyRef Name="idRuta" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idRuta" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoNoticia">
+          <Key>
+            <PropertyRef Name="idTipoNoticia" />
+          </Key>
+          <Property Name="idTipoNoticia" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" />
+          <Property Name="InformacionContacto" Type="varchar" MaxLength="250" />
+          <Property Name="CuentaActiva" Type="bit" Nullable="false" />
+          <Property Name="PlayerId" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="UsuariosAcceso">
+          <Key>
+            <PropertyRef Name="idUsuariosAcceso" />
+          </Key>
+          <Property Name="idUsuariosAcceso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="int" />
+          <Property Name="idProducto" Type="int" />
+          <Property Name="idUserAutoriza" Type="int" Nullable="false" />
+          <Property Name="fechaAutorización" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VistaGrupo">
+          <Key>
+            <PropertyRef Name="idMensaje" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idMensaje" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="FechaVisto" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Acciones">
+          <Key>
+            <PropertyRef Name="idAccion" />
+          </Key>
+          <Property Name="idAccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="65" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_AccionesInRoles">
+          <Key>
+            <PropertyRef Name="idRole" />
+            <PropertyRef Name="idAccion" />
+          </Key>
+          <Property Name="idRole" Type="int" Nullable="false" />
+          <Property Name="idAccion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles_Admin_Users">
+          <Key>
+            <PropertyRef Name="idRoleMain" />
+            <PropertyRef Name="idRole" />
+          </Key>
+          <Property Name="idRoleMain" Type="int" Nullable="false" />
+          <Property Name="idRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CheckIn_RutaCheckpoint">
+          <End Role="RutaCheckpoint" Type="Self.RutaCheckpoint" Multiplicity="1" />
+          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RutaCheckpoint">
+              <PropertyRef Name="idRutaCheckPoint" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="idCheckpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckIn_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conceptos_Estatus">
+          <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="1" />
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conceptos">
+              <PropertyRef Name="idConcepto" />
+            </Principal>
+            <Dependent Role="Estatus">
+              <PropertyRef Name="idConcepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversacion_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Conversacion" Type="Self.Conversacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Conversacion">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversacion_Usuarios1">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Conversacion" Type="Self.Conversacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Conversacion">
+              <PropertyRef Name="idUsuarioInvitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConversacionGrupalUsuarios_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="ConversacionUsuarios" Type="Self.ConversacionUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="ConversacionUsuarios">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConversacionUsuarios_Conversacion">
+          <End Role="Conversacion" Type="Self.Conversacion" Multiplicity="1" />
+          <End Role="ConversacionUsuarios" Type="Self.ConversacionUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversacion">
+              <PropertyRef Name="idConversacion" />
+            </Principal>
+            <Dependent Role="ConversacionUsuarios">
+              <PropertyRef Name="idConversacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forma_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Forma" Type="Self.Forma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Forma">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forma_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Forma" Type="Self.Forma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="Forma">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaPregunta_Forma">
+          <End Role="Forma" Type="Self.Forma" Multiplicity="1" />
+          <End Role="FormaPregunta" Type="Self.FormaPregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forma">
+              <PropertyRef Name="IdForma" />
+            </Principal>
+            <Dependent Role="FormaPregunta">
+              <PropertyRef Name="idForma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaPreguntaOpcion_FormaPregunta">
+          <End Role="FormaPregunta" Type="Self.FormaPregunta" Multiplicity="1" />
+          <End Role="FormaPreguntaOpcion" Type="Self.FormaPreguntaOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPregunta">
+              <PropertyRef Name="idFormaPregunta" />
+            </Principal>
+            <Dependent Role="FormaPreguntaOpcion">
+              <PropertyRef Name="idFormaPregunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuesta_Forma">
+          <End Role="Forma" Type="Self.Forma" Multiplicity="1" />
+          <End Role="FormaRespuesta" Type="Self.FormaRespuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forma">
+              <PropertyRef Name="IdForma" />
+            </Principal>
+            <Dependent Role="FormaRespuesta">
+              <PropertyRef Name="idForma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuesta_RutaCheckpoint">
+          <End Role="RutaCheckpoint" Type="Self.RutaCheckpoint" Multiplicity="1" />
+          <End Role="FormaRespuesta" Type="Self.FormaRespuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RutaCheckpoint">
+              <PropertyRef Name="idRutaCheckPoint" />
+            </Principal>
+            <Dependent Role="FormaRespuesta">
+              <PropertyRef Name="idRutaCheckpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuesta_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="FormaRespuesta" Type="Self.FormaRespuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="FormaRespuesta">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle_FormaPregunta">
+          <End Role="FormaPregunta" Type="Self.FormaPregunta" Multiplicity="1" />
+          <End Role="FormaRespuestaDetalle" Type="Self.FormaRespuestaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPregunta">
+              <PropertyRef Name="idFormaPregunta" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle">
+              <PropertyRef Name="idFormaPregunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle_FormaPreguntaOpcion">
+          <End Role="FormaPreguntaOpcion" Type="Self.FormaPreguntaOpcion" Multiplicity="0..1" />
+          <End Role="FormaRespuestaDetalle" Type="Self.FormaRespuestaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPreguntaOpcion">
+              <PropertyRef Name="idFormaPreguntaOpcion" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle">
+              <PropertyRef Name="idFormaPreguntaOpcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle_FormaRespuesta">
+          <End Role="FormaRespuesta" Type="Self.FormaRespuesta" Multiplicity="1" />
+          <End Role="FormaRespuestaDetalle" Type="Self.FormaRespuestaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaRespuesta">
+              <PropertyRef Name="idFormaRespuesta" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle">
+              <PropertyRef Name="idFormaRespuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle2_FormaPregunta">
+          <End Role="FormaPregunta" Type="Self.FormaPregunta" Multiplicity="1" />
+          <End Role="FormaRespuestaDetalle2" Type="Self.FormaRespuestaDetalle2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPregunta">
+              <PropertyRef Name="idFormaPregunta" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle2">
+              <PropertyRef Name="idFormaPregunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle2_FormaPreguntaOpcion">
+          <End Role="FormaPreguntaOpcion" Type="Self.FormaPreguntaOpcion" Multiplicity="1" />
+          <End Role="FormaRespuestaDetalle2" Type="Self.FormaRespuestaDetalle2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPreguntaOpcion">
+              <PropertyRef Name="idFormaPreguntaOpcion" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle2">
+              <PropertyRef Name="idFormaPreguntaOpcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle2_FormaRespuesta">
+          <End Role="FormaRespuesta" Type="Self.FormaRespuesta" Multiplicity="1" />
+          <End Role="FormaRespuestaDetalle2" Type="Self.FormaRespuestaDetalle2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaRespuesta">
+              <PropertyRef Name="idFormaRespuesta" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle2">
+              <PropertyRef Name="idFormaRespuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupo_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupo_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GrupoMiembros_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="GrupoMiembros" Type="Self.GrupoMiembros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="idGrupo" />
+            </Principal>
+            <Dependent Role="GrupoMiembros">
+              <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GrupoMiembros_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="GrupoMiembros" Type="Self.GrupoMiembros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="GrupoMiembros">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Conversacion">
+          <End Role="Conversacion" Type="Self.Conversacion" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversacion">
+              <PropertyRef Name="idConversacion" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idConversacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Noticias_TipoNoticia">
+          <End Role="TipoNoticia" Type="Self.TipoNoticia" Multiplicity="1" />
+          <End Role="Noticias" Type="Self.Noticias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNoticia">
+              <PropertyRef Name="idTipoNoticia" />
+            </Principal>
+            <Dependent Role="Noticias">
+              <PropertyRef Name="idTipoNoticia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NoticiasGrupo_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="NoticiasGrupo" Type="Self.NoticiasGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="idGrupo" />
+            </Principal>
+            <Dependent Role="NoticiasGrupo">
+              <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NoticiasGrupo_Noticias">
+          <End Role="Noticias" Type="Self.Noticias" Multiplicity="1" />
+          <End Role="NoticiasGrupo" Type="Self.NoticiasGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Noticias">
+              <PropertyRef Name="idNoticia" />
+            </Principal>
+            <Dependent Role="NoticiasGrupo">
+              <PropertyRef Name="idNoticia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notificaciones_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Notificaciones" Type="Self.Notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Notificaciones">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RutaCheckpoint_Ruta">
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="1" />
+          <End Role="RutaCheckpoint" Type="Self.RutaCheckpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ruta">
+              <PropertyRef Name="idRuta" />
+            </Principal>
+            <Dependent Role="RutaCheckpoint">
+              <PropertyRef Name="idRuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RutaForma_Forma">
+          <End Role="Forma" Type="Self.Forma" Multiplicity="1" />
+          <End Role="RutaForma" Type="Self.RutaForma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forma">
+              <PropertyRef Name="IdForma" />
+            </Principal>
+            <Dependent Role="RutaForma">
+              <PropertyRef Name="idForma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RutaForma_Ruta">
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="1" />
+          <End Role="RutaForma" Type="Self.RutaForma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ruta">
+              <PropertyRef Name="idRuta" />
+            </Principal>
+            <Dependent Role="RutaForma">
+              <PropertyRef Name="idRuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RutaGrupos_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="RutaGrupos" Type="Self.RutaGrupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="idGrupo" />
+            </Principal>
+            <Dependent Role="RutaGrupos">
+              <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RutaGrupos_Ruta">
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="1" />
+          <End Role="RutaGrupos" Type="Self.RutaGrupos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ruta">
+              <PropertyRef Name="idRuta" />
+            </Principal>
+            <Dependent Role="RutaGrupos">
+              <PropertyRef Name="idRuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RutaUsuarios_Ruta">
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="1" />
+          <End Role="RutaUsuarios" Type="Self.RutaUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ruta">
+              <PropertyRef Name="idRuta" />
+            </Principal>
+            <Dependent Role="RutaUsuarios">
+              <PropertyRef Name="idRuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RutaUsuarios_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="RutaUsuarios" Type="Self.RutaUsuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="RutaUsuarios">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_webpages_UserInRoles">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosAcceso_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="UsuariosAcceso" Type="Self.UsuariosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="UsuariosAcceso">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosAcceso_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="UsuariosAcceso" Type="Self.UsuariosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="UsuariosAcceso">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosAcceso_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="UsuariosAcceso" Type="Self.UsuariosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="UsuariosAcceso">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosAcceso_Usuarios1">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="UsuariosAcceso" Type="Self.UsuariosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="UsuariosAcceso">
+              <PropertyRef Name="idUserAutoriza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VistaGrupo_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="VistaGrupo" Type="Self.VistaGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="VistaGrupo">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VistaGrupo_VistaGrupo">
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="1" />
+          <End Role="VistaGrupo" Type="Self.VistaGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mensaje">
+              <PropertyRef Name="idMensaje" />
+            </Principal>
+            <Dependent Role="VistaGrupo">
+              <PropertyRef Name="idMensaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_AccionesInRoles_webpages_Acciones">
+          <End Role="webpages_Acciones" Type="Self.webpages_Acciones" Multiplicity="1" />
+          <End Role="webpages_AccionesInRoles" Type="Self.webpages_AccionesInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Acciones">
+              <PropertyRef Name="idAccion" />
+            </Principal>
+            <Dependent Role="webpages_AccionesInRoles">
+              <PropertyRef Name="idAccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_AccionesInRoles_webpages_Roles">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_AccionesInRoles" Type="Self.webpages_AccionesInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_AccionesInRoles">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_Roles_Admin_Users_webpages_Roles">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_Roles_Admin_Users" Type="Self.webpages_Roles_Admin_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_Roles_Admin_Users">
+              <PropertyRef Name="idRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_Roles_Admin_Users_webpages_Roles_Main">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_Roles_Admin_Users" Type="Self.webpages_Roles_Admin_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_Roles_Admin_Users">
+              <PropertyRef Name="idRoleMain" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_Roles_webpages_UserInRoles">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefCapacitacion47">
+          <End Role="Capacitacion" Type="Self.Capacitacion" Multiplicity="1" />
+          <End Role="CapacitacionTema" Type="Self.CapacitacionTema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Capacitacion">
+              <PropertyRef Name="idCapacitacion" />
+            </Principal>
+            <Dependent Role="CapacitacionTema">
+              <PropertyRef Name="idCapacitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefCapacitacion59">
+          <End Role="Capacitacion" Type="Self.Capacitacion" Multiplicity="1" />
+          <End Role="CapacitacionGrupo" Type="Self.CapacitacionGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Capacitacion">
+              <PropertyRef Name="idCapacitacion" />
+            </Principal>
+            <Dependent Role="CapacitacionGrupo">
+              <PropertyRef Name="idCapacitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefCapacitacionArchivos49">
+          <End Role="CapacitacionArchivos" Type="Self.CapacitacionArchivos" Multiplicity="1" />
+          <End Role="CapacitacionVisitas" Type="Self.CapacitacionVisitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapacitacionArchivos">
+              <PropertyRef Name="idCapacitacionArchivos" />
+            </Principal>
+            <Dependent Role="CapacitacionVisitas">
+              <PropertyRef Name="idCapacitacionArchivos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefCapacitacionTema48">
+          <End Role="CapacitacionTema" Type="Self.CapacitacionTema" Multiplicity="1" />
+          <End Role="CapacitacionArchivos" Type="Self.CapacitacionArchivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapacitacionTema">
+              <PropertyRef Name="idTemaCapacitacion" />
+            </Principal>
+            <Dependent Role="CapacitacionArchivos">
+              <PropertyRef Name="idTemaCapacitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefGrupo60">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="CapacitacionGrupo" Type="Self.CapacitacionGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="idGrupo" />
+            </Principal>
+            <Dependent Role="CapacitacionGrupo">
+              <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefUsuarios50">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="CapacitacionVisitas" Type="Self.CapacitacionVisitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="CapacitacionVisitas">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseModelStoreContainer">
+          <EntitySet Name="Capacitacion" EntityType="Self.Capacitacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CapacitacionArchivos" EntityType="Self.CapacitacionArchivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CapacitacionGrupo" EntityType="Self.CapacitacionGrupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CapacitacionTema" EntityType="Self.CapacitacionTema" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CapacitacionVisitas" EntityType="Self.CapacitacionVisitas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CheckIn" EntityType="Self.CheckIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conceptos" EntityType="Self.Conceptos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conversacion" EntityType="Self.Conversacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConversacionUsuarios" EntityType="Self.ConversacionUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estatus" EntityType="Self.Estatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forma" EntityType="Self.Forma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormaPregunta" EntityType="Self.FormaPregunta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormaPreguntaOpcion" EntityType="Self.FormaPreguntaOpcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormaRespuesta" EntityType="Self.FormaRespuesta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormaRespuestaDetalle" EntityType="Self.FormaRespuestaDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormaRespuestaDetalle2" EntityType="Self.FormaRespuestaDetalle2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrupoMiembros" EntityType="Self.GrupoMiembros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mensaje" EntityType="Self.Mensaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Noticias" EntityType="Self.Noticias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NoticiasGrupo" EntityType="Self.NoticiasGrupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notificaciones" EntityType="Self.Notificaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ruta" EntityType="Self.Ruta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RutaCheckpoint" EntityType="Self.RutaCheckpoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RutaForma" EntityType="Self.RutaForma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RutaGrupos" EntityType="Self.RutaGrupos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RutaUsuarios" EntityType="Self.RutaUsuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoNoticia" EntityType="Self.TipoNoticia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuariosAcceso" EntityType="Self.UsuariosAcceso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VistaGrupo" EntityType="Self.VistaGrupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Acciones" EntityType="Self.webpages_Acciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_AccionesInRoles" EntityType="Self.webpages_AccionesInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles_Admin_Users" EntityType="Self.webpages_Roles_Admin_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CheckIn_RutaCheckpoint" Association="Self.FK_CheckIn_RutaCheckpoint">
+            <End Role="RutaCheckpoint" EntitySet="RutaCheckpoint" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckIn_Usuarios" Association="Self.FK_CheckIn_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conceptos_Estatus" Association="Self.FK_Conceptos_Estatus">
+            <End Role="Conceptos" EntitySet="Conceptos" />
+            <End Role="Estatus" EntitySet="Estatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversacion_Usuarios" Association="Self.FK_Conversacion_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Conversacion" EntitySet="Conversacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversacion_Usuarios1" Association="Self.FK_Conversacion_Usuarios1">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Conversacion" EntitySet="Conversacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConversacionGrupalUsuarios_Usuarios" Association="Self.FK_ConversacionGrupalUsuarios_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="ConversacionUsuarios" EntitySet="ConversacionUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConversacionUsuarios_Conversacion" Association="Self.FK_ConversacionUsuarios_Conversacion">
+            <End Role="Conversacion" EntitySet="Conversacion" />
+            <End Role="ConversacionUsuarios" EntitySet="ConversacionUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forma_Cliente" Association="Self.FK_Forma_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Forma" EntitySet="Forma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forma_Producto" Association="Self.FK_Forma_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Forma" EntitySet="Forma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaPregunta_Forma" Association="Self.FK_FormaPregunta_Forma">
+            <End Role="Forma" EntitySet="Forma" />
+            <End Role="FormaPregunta" EntitySet="FormaPregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaPreguntaOpcion_FormaPregunta" Association="Self.FK_FormaPreguntaOpcion_FormaPregunta">
+            <End Role="FormaPregunta" EntitySet="FormaPregunta" />
+            <End Role="FormaPreguntaOpcion" EntitySet="FormaPreguntaOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuesta_Forma" Association="Self.FK_FormaRespuesta_Forma">
+            <End Role="Forma" EntitySet="Forma" />
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuesta_RutaCheckpoint" Association="Self.FK_FormaRespuesta_RutaCheckpoint">
+            <End Role="RutaCheckpoint" EntitySet="RutaCheckpoint" />
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuesta_Usuarios" Association="Self.FK_FormaRespuesta_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle_FormaPregunta" Association="Self.FK_FormaRespuestaDetalle_FormaPregunta">
+            <End Role="FormaPregunta" EntitySet="FormaPregunta" />
+            <End Role="FormaRespuestaDetalle" EntitySet="FormaRespuestaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle_FormaPreguntaOpcion" Association="Self.FK_FormaRespuestaDetalle_FormaPreguntaOpcion">
+            <End Role="FormaPreguntaOpcion" EntitySet="FormaPreguntaOpcion" />
+            <End Role="FormaRespuestaDetalle" EntitySet="FormaRespuestaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle_FormaRespuesta" Association="Self.FK_FormaRespuestaDetalle_FormaRespuesta">
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+            <End Role="FormaRespuestaDetalle" EntitySet="FormaRespuestaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle2_FormaPregunta" Association="Self.FK_FormaRespuestaDetalle2_FormaPregunta">
+            <End Role="FormaPregunta" EntitySet="FormaPregunta" />
+            <End Role="FormaRespuestaDetalle2" EntitySet="FormaRespuestaDetalle2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle2_FormaPreguntaOpcion" Association="Self.FK_FormaRespuestaDetalle2_FormaPreguntaOpcion">
+            <End Role="FormaPreguntaOpcion" EntitySet="FormaPreguntaOpcion" />
+            <End Role="FormaRespuestaDetalle2" EntitySet="FormaRespuestaDetalle2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle2_FormaRespuesta" Association="Self.FK_FormaRespuestaDetalle2_FormaRespuesta">
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+            <End Role="FormaRespuestaDetalle2" EntitySet="FormaRespuestaDetalle2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Cliente" Association="Self.FK_Grupo_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Producto" Association="Self.FK_Grupo_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GrupoMiembros_Grupo" Association="Self.FK_GrupoMiembros_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="GrupoMiembros" EntitySet="GrupoMiembros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GrupoMiembros_Usuarios" Association="Self.FK_GrupoMiembros_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="GrupoMiembros" EntitySet="GrupoMiembros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Conversacion" Association="Self.FK_Mensaje_Conversacion">
+            <End Role="Conversacion" EntitySet="Conversacion" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Usuarios" Association="Self.FK_Mensaje_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Noticias_TipoNoticia" Association="Self.FK_Noticias_TipoNoticia">
+            <End Role="TipoNoticia" EntitySet="TipoNoticia" />
+            <End Role="Noticias" EntitySet="Noticias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NoticiasGrupo_Grupo" Association="Self.FK_NoticiasGrupo_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="NoticiasGrupo" EntitySet="NoticiasGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NoticiasGrupo_Noticias" Association="Self.FK_NoticiasGrupo_Noticias">
+            <End Role="Noticias" EntitySet="Noticias" />
+            <End Role="NoticiasGrupo" EntitySet="NoticiasGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notificaciones_Usuarios" Association="Self.FK_Notificaciones_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Notificaciones" EntitySet="Notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Cliente" Association="Self.FK_Producto_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Cliente" Association="Self.FK_Ruta_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Producto" Association="Self.FK_Ruta_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RutaCheckpoint_Ruta" Association="Self.FK_RutaCheckpoint_Ruta">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="RutaCheckpoint" EntitySet="RutaCheckpoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RutaForma_Forma" Association="Self.FK_RutaForma_Forma">
+            <End Role="Forma" EntitySet="Forma" />
+            <End Role="RutaForma" EntitySet="RutaForma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RutaForma_Ruta" Association="Self.FK_RutaForma_Ruta">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="RutaForma" EntitySet="RutaForma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RutaGrupos_Grupo" Association="Self.FK_RutaGrupos_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="RutaGrupos" EntitySet="RutaGrupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RutaGrupos_Ruta" Association="Self.FK_RutaGrupos_Ruta">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="RutaGrupos" EntitySet="RutaGrupos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RutaUsuarios_Ruta" Association="Self.FK_RutaUsuarios_Ruta">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="RutaUsuarios" EntitySet="RutaUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RutaUsuarios_Usuarios" Association="Self.FK_RutaUsuarios_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="RutaUsuarios" EntitySet="RutaUsuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_webpages_UserInRoles" Association="Self.FK_Usuarios_webpages_UserInRoles">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosAcceso_Cliente" Association="Self.FK_UsuariosAcceso_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="UsuariosAcceso" EntitySet="UsuariosAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosAcceso_Producto" Association="Self.FK_UsuariosAcceso_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="UsuariosAcceso" EntitySet="UsuariosAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosAcceso_Usuarios" Association="Self.FK_UsuariosAcceso_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UsuariosAcceso" EntitySet="UsuariosAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosAcceso_Usuarios1" Association="Self.FK_UsuariosAcceso_Usuarios1">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UsuariosAcceso" EntitySet="UsuariosAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VistaGrupo_Usuarios" Association="Self.FK_VistaGrupo_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="VistaGrupo" EntitySet="VistaGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VistaGrupo_VistaGrupo" Association="Self.FK_VistaGrupo_VistaGrupo">
+            <End Role="Mensaje" EntitySet="Mensaje" />
+            <End Role="VistaGrupo" EntitySet="VistaGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_AccionesInRoles_webpages_Acciones" Association="Self.FK_webpages_AccionesInRoles_webpages_Acciones">
+            <End Role="webpages_Acciones" EntitySet="webpages_Acciones" />
+            <End Role="webpages_AccionesInRoles" EntitySet="webpages_AccionesInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_AccionesInRoles_webpages_Roles" Association="Self.FK_webpages_AccionesInRoles_webpages_Roles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_AccionesInRoles" EntitySet="webpages_AccionesInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_Roles_Admin_Users_webpages_Roles" Association="Self.FK_webpages_Roles_Admin_Users_webpages_Roles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_Roles_Admin_Users" EntitySet="webpages_Roles_Admin_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_Roles_Admin_Users_webpages_Roles_Main" Association="Self.FK_webpages_Roles_Admin_Users_webpages_Roles_Main">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_Roles_Admin_Users" EntitySet="webpages_Roles_Admin_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_Roles_webpages_UserInRoles" Association="Self.FK_webpages_Roles_webpages_UserInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="RefCapacitacion47" Association="Self.RefCapacitacion47">
+            <End Role="Capacitacion" EntitySet="Capacitacion" />
+            <End Role="CapacitacionTema" EntitySet="CapacitacionTema" />
+          </AssociationSet>
+          <AssociationSet Name="RefCapacitacion59" Association="Self.RefCapacitacion59">
+            <End Role="Capacitacion" EntitySet="Capacitacion" />
+            <End Role="CapacitacionGrupo" EntitySet="CapacitacionGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="RefCapacitacionArchivos49" Association="Self.RefCapacitacionArchivos49">
+            <End Role="CapacitacionArchivos" EntitySet="CapacitacionArchivos" />
+            <End Role="CapacitacionVisitas" EntitySet="CapacitacionVisitas" />
+          </AssociationSet>
+          <AssociationSet Name="RefCapacitacionTema48" Association="Self.RefCapacitacionTema48">
+            <End Role="CapacitacionTema" EntitySet="CapacitacionTema" />
+            <End Role="CapacitacionArchivos" EntitySet="CapacitacionArchivos" />
+          </AssociationSet>
+          <AssociationSet Name="RefGrupo60" Association="Self.RefGrupo60">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="CapacitacionGrupo" EntitySet="CapacitacionGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="RefUsuarios50" Association="Self.RefUsuarios50">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CapacitacionVisitas" EntitySet="CapacitacionVisitas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Conceptos">
+          <Key>
+            <PropertyRef Name="idConcepto" />
+          </Key>
+          <Property Name="idConcepto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clave" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estatus" Relationship="Self.FK_Conceptos_Estatus" FromRole="Conceptos" ToRole="Estatus" />
+        </EntityType>
+        <EntityType Name="Estatus">
+          <Key>
+            <PropertyRef Name="idEstatus" />
+          </Key>
+          <Property Name="idEstatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idConcepto" Type="Int32" Nullable="false" />
+          <Property Name="ClaveInterna" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ClaveExterna" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Conceptos" Relationship="Self.FK_Conceptos_Estatus" FromRole="Estatus" ToRole="Conceptos" />
+        </EntityType>
+        <EntityType Name="Parametros">
+          <Key>
+            <PropertyRef Name="idParametro" />
+          </Key>
+          <Property Name="idParametro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clave" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Valor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InformacionContacto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CuentaActiva" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="webpages_Roles" Relationship="Self.webpages_UsersInRoles" FromRole="Usuarios" ToRole="webpages_Roles" />
+          <NavigationProperty Name="Ruta" Relationship="BaseModel.RutaUsuarios" FromRole="Usuarios" ToRole="Ruta" />
+          <NavigationProperty Name="Grupo" Relationship="BaseModel.GrupoMiembros" FromRole="Usuarios" ToRole="Grupo" />
+          <NavigationProperty Name="CheckIn" Relationship="BaseModel.FK_CheckIn_Usuarios" FromRole="Usuarios" ToRole="CheckIn" />
+          <NavigationProperty Name="Conversacion" Relationship="BaseModel.FK_Conversacion_Usuarios" FromRole="Usuarios" ToRole="Conversacion" />
+          <NavigationProperty Name="Conversacion1" Relationship="BaseModel.FK_Conversacion_Usuarios1" FromRole="Usuarios" ToRole="Conversacion" />
+          <NavigationProperty Name="Mensaje" Relationship="BaseModel.FK_Mensaje_Usuarios" FromRole="Usuarios" ToRole="Mensaje" />
+          <NavigationProperty Name="VistaGrupo" Relationship="BaseModel.FK_VistaGrupo_Usuarios" FromRole="Usuarios" ToRole="VistaGrupo" />
+          <NavigationProperty Name="Conversacion2" Relationship="BaseModel.ConversacionUsuarios" FromRole="Usuarios" ToRole="Conversacion" />
+          <NavigationProperty Name="FormaRespuesta" Relationship="BaseModel.FK_FormaRespuesta_Usuarios" FromRole="Usuarios" ToRole="FormaRespuesta" />
+          <Property Name="PlayerId" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CapacitacionVisitas" Relationship="BaseModel.RefUsuarios50" FromRole="Usuarios" ToRole="CapacitacionVisitas" />
+          <NavigationProperty Name="Notificaciones" Relationship="BaseModel.FK_Notificaciones_Usuarios" FromRole="Usuarios" ToRole="Notificaciones" />
+          <NavigationProperty Name="UsuariosAcceso" Relationship="BaseModel.FK_UsuariosAcceso_Usuarios" FromRole="Usuarios" ToRole="UsuariosAcceso" />
+          <NavigationProperty Name="UsuariosAcceso1" Relationship="BaseModel.FK_UsuariosAcceso_Usuarios1" FromRole="Usuarios" ToRole="UsuariosAcceso" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="Usuarios" />
+          <NavigationProperty Name="webpages_Acciones" Relationship="BaseModel.webpages_AccionesInRoles" FromRole="webpages_Roles" ToRole="webpages_Acciones" />
+          <NavigationProperty Name="webpages_RolesMain" Relationship="BaseModel.webpages_Roles_Admin_Users" FromRole="webpages_Roles" ToRole="webpages_Roles1" />
+          <NavigationProperty Name="webpages_RolesSub" Relationship="BaseModel.webpages_Roles_Admin_Users" FromRole="webpages_Roles1" ToRole="webpages_Roles" />
+        </EntityType>
+        <Association Name="FK_Conceptos_Estatus">
+          <End Role="Conceptos" Type="Self.Conceptos" Multiplicity="1" />
+          <End Role="Estatus" Type="Self.Estatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conceptos">
+              <PropertyRef Name="idConcepto" />
+            </Principal>
+            <Dependent Role="Estatus">
+              <PropertyRef Name="idConcepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Conceptos" EntityType="Self.Conceptos" />
+          <EntitySet Name="Estatus" EntityType="Self.Estatus" />
+          <EntitySet Name="Parametros" EntityType="Self.Parametros" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+          <AssociationSet Name="FK_Conceptos_Estatus" Association="Self.FK_Conceptos_Estatus">
+            <End Role="Conceptos" EntitySet="Conceptos" />
+            <End Role="Estatus" EntitySet="Estatus" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="Self.webpages_UsersInRoles">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+          </AssociationSet>
+          <EntitySet Name="webpages_Acciones" EntityType="BaseModel.webpages_Acciones" />
+          <AssociationSet Name="webpages_AccionesInRoles" Association="BaseModel.webpages_AccionesInRoles">
+            <End Role="webpages_Acciones" EntitySet="webpages_Acciones" />
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_Roles_Admin_Users" Association="BaseModel.webpages_Roles_Admin_Users">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_Roles1" EntitySet="webpages_Roles" />
+          </AssociationSet>
+          <EntitySet Name="Ruta" EntityType="BaseModel.Ruta" />
+          <EntitySet Name="RutaCheckpoint" EntityType="BaseModel.RutaCheckpoint" />
+          <AssociationSet Name="FK_RutaCheckpoint_Ruta" Association="BaseModel.FK_RutaCheckpoint_Ruta">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="RutaCheckpoint" EntitySet="RutaCheckpoint" />
+          </AssociationSet>
+          <AssociationSet Name="RutaUsuarios" Association="BaseModel.RutaUsuarios">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <EntitySet Name="Grupo" EntityType="BaseModel.Grupo" />
+          <AssociationSet Name="GrupoMiembros" Association="BaseModel.GrupoMiembros">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="RutaGrupos" Association="BaseModel.RutaGrupos">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <EntitySet Name="CheckIn" EntityType="BaseModel.CheckIn" />
+          <AssociationSet Name="FK_CheckIn_RutaCheckpoint" Association="BaseModel.FK_CheckIn_RutaCheckpoint">
+            <End Role="RutaCheckpoint" EntitySet="RutaCheckpoint" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckIn_Usuarios" Association="BaseModel.FK_CheckIn_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <EntitySet Name="Forma" EntityType="BaseModel.Forma" />
+          <EntitySet Name="FormaPregunta" EntityType="BaseModel.FormaPregunta" />
+          <EntitySet Name="FormaPreguntaOpcion" EntityType="BaseModel.FormaPreguntaOpcion" />
+          <AssociationSet Name="FK_FormaPregunta_Forma" Association="BaseModel.FK_FormaPregunta_Forma">
+            <End Role="Forma" EntitySet="Forma" />
+            <End Role="FormaPregunta" EntitySet="FormaPregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaPreguntaOpcion_FormaPregunta" Association="BaseModel.FK_FormaPreguntaOpcion_FormaPregunta">
+            <End Role="FormaPregunta" EntitySet="FormaPregunta" />
+            <End Role="FormaPreguntaOpcion" EntitySet="FormaPreguntaOpcion" />
+          </AssociationSet>
+          <AssociationSet Name="RutaForma" Association="BaseModel.RutaForma">
+            <End Role="Forma" EntitySet="Forma" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <EntitySet Name="Conversacion" EntityType="BaseModel.Conversacion" />
+          <EntitySet Name="Mensaje" EntityType="BaseModel.Mensaje" />
+          <EntitySet Name="VistaGrupo" EntityType="BaseModel.VistaGrupo" />
+          <AssociationSet Name="FK_Conversacion_Usuarios" Association="BaseModel.FK_Conversacion_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Conversacion" EntitySet="Conversacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversacion_Usuarios1" Association="BaseModel.FK_Conversacion_Usuarios1">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Conversacion" EntitySet="Conversacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Conversacion" Association="BaseModel.FK_Mensaje_Conversacion">
+            <End Role="Conversacion" EntitySet="Conversacion" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Usuarios" Association="BaseModel.FK_Mensaje_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VistaGrupo_VistaGrupo" Association="BaseModel.FK_VistaGrupo_VistaGrupo">
+            <End Role="Mensaje" EntitySet="Mensaje" />
+            <End Role="VistaGrupo" EntitySet="VistaGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VistaGrupo_Usuarios" Association="BaseModel.FK_VistaGrupo_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="VistaGrupo" EntitySet="VistaGrupo" />
+          </AssociationSet>
+          <AssociationSet Name="ConversacionUsuarios" Association="BaseModel.ConversacionUsuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Conversacion" EntitySet="Conversacion" />
+          </AssociationSet>
+          <EntitySet Name="FormaRespuesta" EntityType="BaseModel.FormaRespuesta" />
+          <EntitySet Name="FormaRespuestaDetalle" EntityType="BaseModel.FormaRespuestaDetalle" />
+          <AssociationSet Name="FK_FormaRespuesta_Forma" Association="BaseModel.FK_FormaRespuesta_Forma">
+            <End Role="Forma" EntitySet="Forma" />
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle_FormaPregunta" Association="BaseModel.FK_FormaRespuestaDetalle_FormaPregunta">
+            <End Role="FormaPregunta" EntitySet="FormaPregunta" />
+            <End Role="FormaRespuestaDetalle" EntitySet="FormaRespuestaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle_FormaPreguntaOpcion" Association="BaseModel.FK_FormaRespuestaDetalle_FormaPreguntaOpcion">
+            <End Role="FormaPreguntaOpcion" EntitySet="FormaPreguntaOpcion" />
+            <End Role="FormaRespuestaDetalle" EntitySet="FormaRespuestaDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuesta_RutaCheckpoint" Association="BaseModel.FK_FormaRespuesta_RutaCheckpoint">
+            <End Role="RutaCheckpoint" EntitySet="RutaCheckpoint" />
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuesta_Usuarios" Association="BaseModel.FK_FormaRespuesta_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle_FormaRespuesta" Association="BaseModel.FK_FormaRespuestaDetalle_FormaRespuesta">
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+            <End Role="FormaRespuestaDetalle" EntitySet="FormaRespuestaDetalle" />
+          </AssociationSet>
+          <EntitySet Name="FormaRespuestaDetalle2" EntityType="BaseModel.FormaRespuestaDetalle2" />
+          <AssociationSet Name="FK_FormaRespuestaDetalle2_FormaPregunta" Association="BaseModel.FK_FormaRespuestaDetalle2_FormaPregunta">
+            <End Role="FormaPregunta" EntitySet="FormaPregunta" />
+            <End Role="FormaRespuestaDetalle2" EntitySet="FormaRespuestaDetalle2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle2_FormaPreguntaOpcion" Association="BaseModel.FK_FormaRespuestaDetalle2_FormaPreguntaOpcion">
+            <End Role="FormaPreguntaOpcion" EntitySet="FormaPreguntaOpcion" />
+            <End Role="FormaRespuestaDetalle2" EntitySet="FormaRespuestaDetalle2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormaRespuestaDetalle2_FormaRespuesta" Association="BaseModel.FK_FormaRespuestaDetalle2_FormaRespuesta">
+            <End Role="FormaRespuesta" EntitySet="FormaRespuesta" />
+            <End Role="FormaRespuestaDetalle2" EntitySet="FormaRespuestaDetalle2" />
+          </AssociationSet>
+          <EntitySet Name="TipoNoticia" EntityType="BaseModel.TipoNoticia" />
+          <EntitySet Name="Noticias" EntityType="BaseModel.Noticias" />
+          <AssociationSet Name="FK_Noticias_TipoNoticia" Association="BaseModel.FK_Noticias_TipoNoticia">
+            <End Role="TipoNoticia" EntitySet="TipoNoticia" />
+            <End Role="Noticias" EntitySet="Noticias" />
+          </AssociationSet>
+          <EntitySet Name="CapacitacionTema" EntityType="BaseModel.CapacitacionTema" />
+          <EntitySet Name="CapacitacionVisitas" EntityType="BaseModel.CapacitacionVisitas" />
+          <AssociationSet Name="RefUsuarios50" Association="BaseModel.RefUsuarios50">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CapacitacionVisitas" EntitySet="CapacitacionVisitas" />
+          </AssociationSet>
+          <EntitySet Name="CapacitacionArchivos" EntityType="BaseModel.CapacitacionArchivos" />
+          <AssociationSet Name="RefCapacitacionArchivos49" Association="BaseModel.RefCapacitacionArchivos49">
+            <End Role="CapacitacionArchivos" EntitySet="CapacitacionArchivos" />
+            <End Role="CapacitacionVisitas" EntitySet="CapacitacionVisitas" />
+          </AssociationSet>
+          <AssociationSet Name="RefCapacitacionTema48" Association="BaseModel.RefCapacitacionTema48">
+            <End Role="CapacitacionTema" EntitySet="CapacitacionTema" />
+            <End Role="CapacitacionArchivos" EntitySet="CapacitacionArchivos" />
+          </AssociationSet>
+          <EntitySet Name="Capacitacion" EntityType="BaseModel.Capacitacion" />
+          <AssociationSet Name="RefCapacitacion47" Association="BaseModel.RefCapacitacion47">
+            <End Role="Capacitacion" EntitySet="Capacitacion" />
+            <End Role="CapacitacionTema" EntitySet="CapacitacionTema" />
+          </AssociationSet>
+          <AssociationSet Name="CapacitacionGrupo" Association="BaseModel.CapacitacionGrupo">
+            <End Role="Capacitacion" EntitySet="Capacitacion" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <EntitySet Name="Notificaciones" EntityType="BaseModel.Notificaciones" />
+          <AssociationSet Name="FK_Notificaciones_Usuarios" Association="BaseModel.FK_Notificaciones_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Notificaciones" EntitySet="Notificaciones" />
+          </AssociationSet>
+          <EntitySet Name="Cliente" EntityType="BaseModel.Cliente" />
+          <EntitySet Name="Producto" EntityType="BaseModel.Producto" />
+          <AssociationSet Name="FK_Forma_Cliente" Association="BaseModel.FK_Forma_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Forma" EntitySet="Forma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Cliente" Association="BaseModel.FK_Grupo_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Cliente" Association="BaseModel.FK_Producto_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Cliente" Association="BaseModel.FK_Ruta_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forma_Producto" Association="BaseModel.FK_Forma_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Forma" EntitySet="Forma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Producto" Association="BaseModel.FK_Grupo_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Producto" Association="BaseModel.FK_Ruta_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="NoticiasGrupo" Association="BaseModel.NoticiasGrupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Noticias" EntitySet="Noticias" />
+          </AssociationSet>
+          <EntitySet Name="UsuariosAcceso" EntityType="BaseModel.UsuariosAcceso" />
+          <AssociationSet Name="FK_UsuariosAcceso_Cliente" Association="BaseModel.FK_UsuariosAcceso_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="UsuariosAcceso" EntitySet="UsuariosAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosAcceso_Producto" Association="BaseModel.FK_UsuariosAcceso_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="UsuariosAcceso" EntitySet="UsuariosAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosAcceso_Usuarios" Association="BaseModel.FK_UsuariosAcceso_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UsuariosAcceso" EntitySet="UsuariosAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuariosAcceso_Usuarios1" Association="BaseModel.FK_UsuariosAcceso_Usuarios1">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="UsuariosAcceso" EntitySet="UsuariosAcceso" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="webpages_Acciones">
+          <Key>
+            <PropertyRef Name="idAccion" />
+          </Key>
+          <Property Name="idAccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="65" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="webpages_Roles" Relationship="BaseModel.webpages_AccionesInRoles" FromRole="webpages_Acciones" ToRole="webpages_Roles" />
+        </EntityType>
+        <Association Name="webpages_AccionesInRoles">
+          <End Type="BaseModel.webpages_Acciones" Role="webpages_Acciones" Multiplicity="*" />
+          <End Type="BaseModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+        </Association>
+        <Association Name="webpages_Roles_Admin_Users">
+          <End Type="BaseModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+          <End Type="BaseModel.webpages_Roles" Role="webpages_Roles1" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Ruta">
+          <Key>
+            <PropertyRef Name="idRuta" />
+          </Key>
+          <Property Name="idRuta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RutaCheckpoint" Relationship="BaseModel.FK_RutaCheckpoint_Ruta" FromRole="Ruta" ToRole="RutaCheckpoint" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.RutaUsuarios" FromRole="Ruta" ToRole="Usuarios" />
+          <NavigationProperty Name="Grupo" Relationship="BaseModel.RutaGrupos" FromRole="Ruta" ToRole="Grupo" />
+          <NavigationProperty Name="Forma" Relationship="BaseModel.RutaForma" FromRole="Ruta" ToRole="Forma" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="BaseModel.FK_Ruta_Cliente" FromRole="Ruta" ToRole="Cliente" />
+          <NavigationProperty Name="Producto" Relationship="BaseModel.FK_Ruta_Producto" FromRole="Ruta" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="RutaCheckpoint">
+          <Key>
+            <PropertyRef Name="idRutaCheckPoint" />
+          </Key>
+          <Property Name="idRutaCheckPoint" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRuta" Type="Int32" Nullable="false" />
+          <Property Name="Latitud" Type="Double" Nullable="false" />
+          <Property Name="Longitud" Type="Double" Nullable="false" />
+          <Property Name="Lugar" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Llegada" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Salida" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Ruta" Relationship="BaseModel.FK_RutaCheckpoint_Ruta" FromRole="RutaCheckpoint" ToRole="Ruta" />
+          <NavigationProperty Name="CheckIn" Relationship="BaseModel.FK_CheckIn_RutaCheckpoint" FromRole="RutaCheckpoint" ToRole="CheckIn" />
+          <NavigationProperty Name="FormaRespuesta" Relationship="BaseModel.FK_FormaRespuesta_RutaCheckpoint" FromRole="RutaCheckpoint" ToRole="FormaRespuesta" />
+        </EntityType>
+        <Association Name="FK_RutaCheckpoint_Ruta">
+          <End Type="BaseModel.Ruta" Role="Ruta" Multiplicity="1" />
+          <End Type="BaseModel.RutaCheckpoint" Role="RutaCheckpoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ruta">
+              <PropertyRef Name="idRuta" />
+            </Principal>
+            <Dependent Role="RutaCheckpoint">
+              <PropertyRef Name="idRuta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RutaUsuarios">
+          <End Type="BaseModel.Ruta" Role="Ruta" Multiplicity="*" />
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="idGrupo" />
+          </Key>
+          <Property Name="idGrupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.GrupoMiembros" FromRole="Grupo" ToRole="Usuarios" />
+          <NavigationProperty Name="Ruta" Relationship="BaseModel.RutaGrupos" FromRole="Grupo" ToRole="Ruta" />
+          <NavigationProperty Name="Capacitacion" Relationship="BaseModel.CapacitacionGrupo" FromRole="Grupo" ToRole="Capacitacion" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="BaseModel.FK_Grupo_Cliente" FromRole="Grupo" ToRole="Cliente" />
+          <NavigationProperty Name="Producto" Relationship="BaseModel.FK_Grupo_Producto" FromRole="Grupo" ToRole="Producto" />
+          <NavigationProperty Name="Noticias" Relationship="BaseModel.NoticiasGrupo" FromRole="Grupo" ToRole="Noticias" />
+        </EntityType>
+        <Association Name="GrupoMiembros">
+          <End Type="BaseModel.Grupo" Role="Grupo" Multiplicity="*" />
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+        </Association>
+        <Association Name="RutaGrupos">
+          <End Type="BaseModel.Grupo" Role="Grupo" Multiplicity="*" />
+          <End Type="BaseModel.Ruta" Role="Ruta" Multiplicity="*" />
+        </Association>
+        <EntityType Name="CheckIn">
+          <Key>
+            <PropertyRef Name="idCheckin" />
+          </Key>
+          <Property Name="idCheckin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idCheckpoint" Type="Int32" Nullable="false" />
+          <Property Name="Latitud" Type="Double" Nullable="false" />
+          <Property Name="Longitud" Type="Double" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EsEntrada" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RutaCheckpoint" Relationship="BaseModel.FK_CheckIn_RutaCheckpoint" FromRole="CheckIn" ToRole="RutaCheckpoint" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.FK_CheckIn_Usuarios" FromRole="CheckIn" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_CheckIn_RutaCheckpoint">
+          <End Type="BaseModel.RutaCheckpoint" Role="RutaCheckpoint" Multiplicity="1" />
+          <End Type="BaseModel.CheckIn" Role="CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RutaCheckpoint">
+              <PropertyRef Name="idRutaCheckPoint" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="idCheckpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckIn_Usuarios">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.CheckIn" Role="CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Forma">
+          <Key>
+            <PropertyRef Name="IdForma" />
+          </Key>
+          <Property Name="IdForma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FormaPregunta" Relationship="BaseModel.FK_FormaPregunta_Forma" FromRole="Forma" ToRole="FormaPregunta" />
+          <NavigationProperty Name="Ruta" Relationship="BaseModel.RutaForma" FromRole="Forma" ToRole="Ruta" />
+          <NavigationProperty Name="FormaRespuesta" Relationship="BaseModel.FK_FormaRespuesta_Forma" FromRole="Forma" ToRole="FormaRespuesta" />
+          <Property Name="idProducto" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="BaseModel.FK_Forma_Cliente" FromRole="Forma" ToRole="Cliente" />
+          <NavigationProperty Name="Producto" Relationship="BaseModel.FK_Forma_Producto" FromRole="Forma" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="FormaPregunta">
+          <Key>
+            <PropertyRef Name="idFormaPregunta" />
+          </Key>
+          <Property Name="idFormaPregunta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idForma" Type="Int32" Nullable="false" />
+          <Property Name="Pregunta" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Forma" Relationship="BaseModel.FK_FormaPregunta_Forma" FromRole="FormaPregunta" ToRole="Forma" />
+          <NavigationProperty Name="FormaPreguntaOpcion" Relationship="BaseModel.FK_FormaPreguntaOpcion_FormaPregunta" FromRole="FormaPregunta" ToRole="FormaPreguntaOpcion" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FormaRespuestaDetalle" Relationship="BaseModel.FK_FormaRespuestaDetalle_FormaPregunta" FromRole="FormaPregunta" ToRole="FormaRespuestaDetalle" />
+          <NavigationProperty Name="FormaRespuestaDetalle2" Relationship="BaseModel.FK_FormaRespuestaDetalle2_FormaPregunta" FromRole="FormaPregunta" ToRole="FormaRespuestaDetalle2" />
+        </EntityType>
+        <EntityType Name="FormaPreguntaOpcion">
+          <Key>
+            <PropertyRef Name="idFormaPreguntaOpcion" />
+          </Key>
+          <Property Name="idFormaPreguntaOpcion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idFormaPregunta" Type="Int32" Nullable="false" />
+          <Property Name="Opcion" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FormaPregunta" Relationship="BaseModel.FK_FormaPreguntaOpcion_FormaPregunta" FromRole="FormaPreguntaOpcion" ToRole="FormaPregunta" />
+          <NavigationProperty Name="FormaRespuestaDetalle" Relationship="BaseModel.FK_FormaRespuestaDetalle_FormaPreguntaOpcion" FromRole="FormaPreguntaOpcion" ToRole="FormaRespuestaDetalle" />
+          <NavigationProperty Name="FormaRespuestaDetalle2" Relationship="BaseModel.FK_FormaRespuestaDetalle2_FormaPreguntaOpcion" FromRole="FormaPreguntaOpcion" ToRole="FormaRespuestaDetalle2" />
+        </EntityType>
+        <Association Name="FK_FormaPregunta_Forma">
+          <End Type="BaseModel.Forma" Role="Forma" Multiplicity="1" />
+          <End Type="BaseModel.FormaPregunta" Role="FormaPregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forma">
+              <PropertyRef Name="IdForma" />
+            </Principal>
+            <Dependent Role="FormaPregunta">
+              <PropertyRef Name="idForma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaPreguntaOpcion_FormaPregunta">
+          <End Type="BaseModel.FormaPregunta" Role="FormaPregunta" Multiplicity="1" />
+          <End Type="BaseModel.FormaPreguntaOpcion" Role="FormaPreguntaOpcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPregunta">
+              <PropertyRef Name="idFormaPregunta" />
+            </Principal>
+            <Dependent Role="FormaPreguntaOpcion">
+              <PropertyRef Name="idFormaPregunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RutaForma">
+          <End Type="BaseModel.Forma" Role="Forma" Multiplicity="*" />
+          <End Type="BaseModel.Ruta" Role="Ruta" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Conversacion">
+          <Key>
+            <PropertyRef Name="idConversacion" />
+          </Key>
+          <Property Name="idConversacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idUsuarioInvitado" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.FK_Conversacion_Usuarios" FromRole="Conversacion" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios1" Relationship="BaseModel.FK_Conversacion_Usuarios1" FromRole="Conversacion" ToRole="Usuarios" />
+          <NavigationProperty Name="Mensaje" Relationship="BaseModel.FK_Mensaje_Conversacion" FromRole="Conversacion" ToRole="Mensaje" />
+          <NavigationProperty Name="Usuarios2" Relationship="BaseModel.ConversacionUsuarios" FromRole="Conversacion" ToRole="Usuarios" />
+          <Property Name="Grupal" Type="Boolean" Nullable="false" />
+          <Property Name="UltimoMensaje" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UltimoFecha" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="idMensaje" />
+          </Key>
+          <Property Name="idMensaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idConversacion" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Mensaje1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaVisto" Type="DateTime" Precision="3" />
+          <Property Name="Visto" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Conversacion" Relationship="BaseModel.FK_Mensaje_Conversacion" FromRole="Mensaje" ToRole="Conversacion" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.FK_Mensaje_Usuarios" FromRole="Mensaje" ToRole="Usuarios" />
+          <NavigationProperty Name="VistaGrupo" Relationship="BaseModel.FK_VistaGrupo_VistaGrupo" FromRole="Mensaje" ToRole="VistaGrupo" />
+        </EntityType>
+        <EntityType Name="VistaGrupo">
+          <Key>
+            <PropertyRef Name="idMensaje" />
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idMensaje" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="FechaVisto" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Mensaje" Relationship="BaseModel.FK_VistaGrupo_VistaGrupo" FromRole="VistaGrupo" ToRole="Mensaje" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.FK_VistaGrupo_Usuarios" FromRole="VistaGrupo" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Conversacion_Usuarios">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.Conversacion" Role="Conversacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Conversacion">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversacion_Usuarios1">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+          <End Type="BaseModel.Conversacion" Role="Conversacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Conversacion">
+              <PropertyRef Name="idUsuarioInvitado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Conversacion">
+          <End Type="BaseModel.Conversacion" Role="Conversacion" Multiplicity="1" />
+          <End Type="BaseModel.Mensaje" Role="Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversacion">
+              <PropertyRef Name="idConversacion" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idConversacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Usuarios">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.Mensaje" Role="Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VistaGrupo_VistaGrupo">
+          <End Type="BaseModel.Mensaje" Role="Mensaje" Multiplicity="1" />
+          <End Type="BaseModel.VistaGrupo" Role="VistaGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mensaje">
+              <PropertyRef Name="idMensaje" />
+            </Principal>
+            <Dependent Role="VistaGrupo">
+              <PropertyRef Name="idMensaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VistaGrupo_Usuarios">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.VistaGrupo" Role="VistaGrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="VistaGrupo">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConversacionUsuarios">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+          <End Type="BaseModel.Conversacion" Role="Conversacion" Multiplicity="*" />
+        </Association>
+        <EntityType Name="FormaRespuesta">
+          <Key>
+            <PropertyRef Name="idFormaRespuesta" />
+          </Key>
+          <Property Name="idFormaRespuesta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idForma" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idRutaCheckpoint" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Forma" Relationship="BaseModel.FK_FormaRespuesta_Forma" FromRole="FormaRespuesta" ToRole="Forma" />
+          <NavigationProperty Name="RutaCheckpoint" Relationship="BaseModel.FK_FormaRespuesta_RutaCheckpoint" FromRole="FormaRespuesta" ToRole="RutaCheckpoint" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.FK_FormaRespuesta_Usuarios" FromRole="FormaRespuesta" ToRole="Usuarios" />
+          <NavigationProperty Name="FormaRespuestaDetalle" Relationship="BaseModel.FK_FormaRespuestaDetalle_FormaRespuesta" FromRole="FormaRespuesta" ToRole="FormaRespuestaDetalle" />
+          <NavigationProperty Name="FormaRespuestaDetalle2" Relationship="BaseModel.FK_FormaRespuestaDetalle2_FormaRespuesta" FromRole="FormaRespuesta" ToRole="FormaRespuestaDetalle2" />
+        </EntityType>
+        <EntityType Name="FormaRespuestaDetalle">
+          <Key>
+            <PropertyRef Name="idFormaRespuesta" />
+            <PropertyRef Name="idFormaPregunta" />
+          </Key>
+          <Property Name="idFormaRespuesta" Type="Int32" Nullable="false" />
+          <Property Name="idFormaPregunta" Type="Int32" Nullable="false" />
+          <Property Name="idFormaPreguntaOpcion" Type="Int32" />
+          <Property Name="Respuesta" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FormaPregunta" Relationship="BaseModel.FK_FormaRespuestaDetalle_FormaPregunta" FromRole="FormaRespuestaDetalle" ToRole="FormaPregunta" />
+          <NavigationProperty Name="FormaPreguntaOpcion" Relationship="BaseModel.FK_FormaRespuestaDetalle_FormaPreguntaOpcion" FromRole="FormaRespuestaDetalle" ToRole="FormaPreguntaOpcion" />
+          <NavigationProperty Name="FormaRespuesta" Relationship="BaseModel.FK_FormaRespuestaDetalle_FormaRespuesta" FromRole="FormaRespuestaDetalle" ToRole="FormaRespuesta" />
+        </EntityType>
+        <Association Name="FK_FormaRespuesta_Forma">
+          <End Type="BaseModel.Forma" Role="Forma" Multiplicity="1" />
+          <End Type="BaseModel.FormaRespuesta" Role="FormaRespuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forma">
+              <PropertyRef Name="IdForma" />
+            </Principal>
+            <Dependent Role="FormaRespuesta">
+              <PropertyRef Name="idForma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle_FormaPregunta">
+          <End Type="BaseModel.FormaPregunta" Role="FormaPregunta" Multiplicity="1" />
+          <End Type="BaseModel.FormaRespuestaDetalle" Role="FormaRespuestaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPregunta">
+              <PropertyRef Name="idFormaPregunta" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle">
+              <PropertyRef Name="idFormaPregunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle_FormaPreguntaOpcion">
+          <End Type="BaseModel.FormaPreguntaOpcion" Role="FormaPreguntaOpcion" Multiplicity="0..1" />
+          <End Type="BaseModel.FormaRespuestaDetalle" Role="FormaRespuestaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPreguntaOpcion">
+              <PropertyRef Name="idFormaPreguntaOpcion" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle">
+              <PropertyRef Name="idFormaPreguntaOpcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuesta_RutaCheckpoint">
+          <End Type="BaseModel.RutaCheckpoint" Role="RutaCheckpoint" Multiplicity="1" />
+          <End Type="BaseModel.FormaRespuesta" Role="FormaRespuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RutaCheckpoint">
+              <PropertyRef Name="idRutaCheckPoint" />
+            </Principal>
+            <Dependent Role="FormaRespuesta">
+              <PropertyRef Name="idRutaCheckpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuesta_Usuarios">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.FormaRespuesta" Role="FormaRespuesta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="FormaRespuesta">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle_FormaRespuesta">
+          <End Type="BaseModel.FormaRespuesta" Role="FormaRespuesta" Multiplicity="1" />
+          <End Type="BaseModel.FormaRespuestaDetalle" Role="FormaRespuestaDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaRespuesta">
+              <PropertyRef Name="idFormaRespuesta" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle">
+              <PropertyRef Name="idFormaRespuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FormaRespuestaDetalle2">
+          <Key>
+            <PropertyRef Name="idFormaRespuesta" />
+            <PropertyRef Name="idFormaPregunta" />
+            <PropertyRef Name="idFormaPreguntaOpcion" />
+          </Key>
+          <Property Name="idFormaRespuesta" Type="Int32" Nullable="false" />
+          <Property Name="idFormaPregunta" Type="Int32" Nullable="false" />
+          <Property Name="idFormaPreguntaOpcion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FormaPregunta" Relationship="BaseModel.FK_FormaRespuestaDetalle2_FormaPregunta" FromRole="FormaRespuestaDetalle2" ToRole="FormaPregunta" />
+          <NavigationProperty Name="FormaPreguntaOpcion" Relationship="BaseModel.FK_FormaRespuestaDetalle2_FormaPreguntaOpcion" FromRole="FormaRespuestaDetalle2" ToRole="FormaPreguntaOpcion" />
+          <NavigationProperty Name="FormaRespuesta" Relationship="BaseModel.FK_FormaRespuestaDetalle2_FormaRespuesta" FromRole="FormaRespuestaDetalle2" ToRole="FormaRespuesta" />
+        </EntityType>
+        <Association Name="FK_FormaRespuestaDetalle2_FormaPregunta">
+          <End Type="BaseModel.FormaPregunta" Role="FormaPregunta" Multiplicity="1" />
+          <End Type="BaseModel.FormaRespuestaDetalle2" Role="FormaRespuestaDetalle2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPregunta">
+              <PropertyRef Name="idFormaPregunta" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle2">
+              <PropertyRef Name="idFormaPregunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle2_FormaPreguntaOpcion">
+          <End Type="BaseModel.FormaPreguntaOpcion" Role="FormaPreguntaOpcion" Multiplicity="1" />
+          <End Type="BaseModel.FormaRespuestaDetalle2" Role="FormaRespuestaDetalle2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPreguntaOpcion">
+              <PropertyRef Name="idFormaPreguntaOpcion" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle2">
+              <PropertyRef Name="idFormaPreguntaOpcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormaRespuestaDetalle2_FormaRespuesta">
+          <End Type="BaseModel.FormaRespuesta" Role="FormaRespuesta" Multiplicity="1" />
+          <End Type="BaseModel.FormaRespuestaDetalle2" Role="FormaRespuestaDetalle2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaRespuesta">
+              <PropertyRef Name="idFormaRespuesta" />
+            </Principal>
+            <Dependent Role="FormaRespuestaDetalle2">
+              <PropertyRef Name="idFormaRespuesta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoNoticia">
+          <Key>
+            <PropertyRef Name="idTipoNoticia" />
+          </Key>
+          <Property Name="idTipoNoticia" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Noticias" Relationship="BaseModel.FK_Noticias_TipoNoticia" FromRole="TipoNoticia" ToRole="Noticias" />
+        </EntityType>
+        <EntityType Name="Noticias">
+          <Key>
+            <PropertyRef Name="idNoticia" />
+          </Key>
+          <Property Name="idNoticia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Imagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="idTipoNoticia" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Activa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TipoNoticia" Relationship="BaseModel.FK_Noticias_TipoNoticia" FromRole="Noticias" ToRole="TipoNoticia" />
+          <NavigationProperty Name="Grupo" Relationship="BaseModel.NoticiasGrupo" FromRole="Noticias" ToRole="Grupo" />
+        </EntityType>
+        <Association Name="FK_Noticias_TipoNoticia">
+          <End Type="BaseModel.TipoNoticia" Role="TipoNoticia" Multiplicity="1" />
+          <End Type="BaseModel.Noticias" Role="Noticias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoNoticia">
+              <PropertyRef Name="idTipoNoticia" />
+            </Principal>
+            <Dependent Role="Noticias">
+              <PropertyRef Name="idTipoNoticia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CapacitacionTema">
+          <Key>
+            <PropertyRef Name="idTemaCapacitacion" />
+          </Key>
+          <Property Name="idTemaCapacitacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCapacitacion" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CapacitacionArchivos" Relationship="BaseModel.RefCapacitacionTema48" FromRole="CapacitacionTema" ToRole="CapacitacionArchivos" />
+          <NavigationProperty Name="Capacitacion" Relationship="BaseModel.RefCapacitacion47" FromRole="CapacitacionTema" ToRole="Capacitacion" />
+        </EntityType>
+        <EntityType Name="CapacitacionVisitas">
+          <Key>
+            <PropertyRef Name="idCapacitacionVisitas" />
+          </Key>
+          <Property Name="idCapacitacionVisitas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaVisita" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idCapacitacionArchivos" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.RefUsuarios50" FromRole="CapacitacionVisitas" ToRole="Usuarios" />
+          <NavigationProperty Name="CapacitacionArchivos" Relationship="BaseModel.RefCapacitacionArchivos49" FromRole="CapacitacionVisitas" ToRole="CapacitacionArchivos" />
+        </EntityType>
+        <Association Name="RefUsuarios50">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.CapacitacionVisitas" Role="CapacitacionVisitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="CapacitacionVisitas">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CapacitacionArchivos">
+          <Key>
+            <PropertyRef Name="idCapacitacionArchivos" />
+          </Key>
+          <Property Name="idCapacitacionArchivos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTemaCapacitacion" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CapacitacionVisitas" Relationship="BaseModel.RefCapacitacionArchivos49" FromRole="CapacitacionArchivos" ToRole="CapacitacionVisitas" />
+          <NavigationProperty Name="CapacitacionTema" Relationship="BaseModel.RefCapacitacionTema48" FromRole="CapacitacionArchivos" ToRole="CapacitacionTema" />
+        </EntityType>
+        <Association Name="RefCapacitacionArchivos49">
+          <End Type="BaseModel.CapacitacionArchivos" Role="CapacitacionArchivos" Multiplicity="1" />
+          <End Type="BaseModel.CapacitacionVisitas" Role="CapacitacionVisitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapacitacionArchivos">
+              <PropertyRef Name="idCapacitacionArchivos" />
+            </Principal>
+            <Dependent Role="CapacitacionVisitas">
+              <PropertyRef Name="idCapacitacionArchivos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RefCapacitacionTema48">
+          <End Type="BaseModel.CapacitacionTema" Role="CapacitacionTema" Multiplicity="1" />
+          <End Type="BaseModel.CapacitacionArchivos" Role="CapacitacionArchivos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CapacitacionTema">
+              <PropertyRef Name="idTemaCapacitacion" />
+            </Principal>
+            <Dependent Role="CapacitacionArchivos">
+              <PropertyRef Name="idTemaCapacitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Capacitacion">
+          <Key>
+            <PropertyRef Name="idCapacitacion" />
+          </Key>
+          <Property Name="idCapacitacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCapacitacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CapacitacionTema" Relationship="BaseModel.RefCapacitacion47" FromRole="Capacitacion" ToRole="CapacitacionTema" />
+          <NavigationProperty Name="Grupo" Relationship="BaseModel.CapacitacionGrupo" FromRole="Capacitacion" ToRole="Grupo" />
+        </EntityType>
+        <Association Name="RefCapacitacion47">
+          <End Type="BaseModel.Capacitacion" Role="Capacitacion" Multiplicity="1" />
+          <End Type="BaseModel.CapacitacionTema" Role="CapacitacionTema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Capacitacion">
+              <PropertyRef Name="idCapacitacion" />
+            </Principal>
+            <Dependent Role="CapacitacionTema">
+              <PropertyRef Name="idCapacitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CapacitacionGrupo">
+          <End Type="BaseModel.Capacitacion" Role="Capacitacion" Multiplicity="*" />
+          <End Type="BaseModel.Grupo" Role="Grupo" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Notificaciones">
+          <Key>
+            <PropertyRef Name="idNotificacion" />
+          </Key>
+          <Property Name="idNotificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mensaje" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.FK_Notificaciones_Usuarios" FromRole="Notificaciones" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_Notificaciones_Usuarios">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.Notificaciones" Role="Notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Notificaciones">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Logo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Forma" Relationship="BaseModel.FK_Forma_Cliente" FromRole="Cliente" ToRole="Forma" />
+          <NavigationProperty Name="Grupo" Relationship="BaseModel.FK_Grupo_Cliente" FromRole="Cliente" ToRole="Grupo" />
+          <NavigationProperty Name="Producto" Relationship="BaseModel.FK_Producto_Cliente" FromRole="Cliente" ToRole="Producto" />
+          <NavigationProperty Name="Ruta" Relationship="BaseModel.FK_Ruta_Cliente" FromRole="Cliente" ToRole="Ruta" />
+          <NavigationProperty Name="UsuariosAcceso" Relationship="BaseModel.FK_UsuariosAcceso_Cliente" FromRole="Cliente" ToRole="UsuariosAcceso" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreProducto" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="BaseModel.FK_Producto_Cliente" FromRole="Producto" ToRole="Cliente" />
+          <NavigationProperty Name="Forma" Relationship="BaseModel.FK_Forma_Producto" FromRole="Producto" ToRole="Forma" />
+          <NavigationProperty Name="Grupo" Relationship="BaseModel.FK_Grupo_Producto" FromRole="Producto" ToRole="Grupo" />
+          <NavigationProperty Name="Ruta" Relationship="BaseModel.FK_Ruta_Producto" FromRole="Producto" ToRole="Ruta" />
+          <NavigationProperty Name="UsuariosAcceso" Relationship="BaseModel.FK_UsuariosAcceso_Producto" FromRole="Producto" ToRole="UsuariosAcceso" />
+        </EntityType>
+        <Association Name="FK_Forma_Cliente">
+          <End Type="BaseModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="BaseModel.Forma" Role="Forma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Forma">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupo_Cliente">
+          <End Type="BaseModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="BaseModel.Grupo" Role="Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Cliente">
+          <End Type="BaseModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="BaseModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Cliente">
+          <End Type="BaseModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="BaseModel.Ruta" Role="Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forma_Producto">
+          <End Type="BaseModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="BaseModel.Forma" Role="Forma" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="Forma">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupo_Producto">
+          <End Type="BaseModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="BaseModel.Grupo" Role="Grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="Grupo">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Producto">
+          <End Type="BaseModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="BaseModel.Ruta" Role="Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="NoticiasGrupo">
+          <End Type="BaseModel.Grupo" Role="Grupo" Multiplicity="*" />
+          <End Type="BaseModel.Noticias" Role="Noticias" Multiplicity="*" />
+        </Association>
+        <EntityType Name="UsuariosAcceso">
+          <Key>
+            <PropertyRef Name="idUsuariosAcceso" />
+          </Key>
+          <Property Name="idUsuariosAcceso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" />
+          <Property Name="idProducto" Type="Int32" />
+          <Property Name="idUserAutoriza" Type="Int32" Nullable="false" />
+          <Property Name="fechaAutorización" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Cliente" Relationship="BaseModel.FK_UsuariosAcceso_Cliente" FromRole="UsuariosAcceso" ToRole="Cliente" />
+          <NavigationProperty Name="Producto" Relationship="BaseModel.FK_UsuariosAcceso_Producto" FromRole="UsuariosAcceso" ToRole="Producto" />
+          <NavigationProperty Name="Usuarios" Relationship="BaseModel.FK_UsuariosAcceso_Usuarios" FromRole="UsuariosAcceso" ToRole="Usuarios" />
+          <NavigationProperty Name="UsuarioAutoriza" Relationship="BaseModel.FK_UsuariosAcceso_Usuarios1" FromRole="UsuariosAcceso" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_UsuariosAcceso_Cliente">
+          <End Type="BaseModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="BaseModel.UsuariosAcceso" Role="UsuariosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="UsuariosAcceso">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosAcceso_Producto">
+          <End Type="BaseModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="BaseModel.UsuariosAcceso" Role="UsuariosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="UsuariosAcceso">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosAcceso_Usuarios">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.UsuariosAcceso" Role="UsuariosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="UsuariosAcceso">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuariosAcceso_Usuarios1">
+          <End Type="BaseModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BaseModel.UsuariosAcceso" Role="UsuariosAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="UsuariosAcceso">
+              <PropertyRef Name="idUserAutoriza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BaseModelStoreContainer" CdmEntityContainer="BaseEntities">
+          <EntitySetMapping Name="Conceptos">
+            <EntityTypeMapping TypeName="BaseModel.Conceptos">
+              <MappingFragment StoreEntitySet="Conceptos">
+                <ScalarProperty Name="idConcepto" ColumnName="idConcepto" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estatus">
+            <EntityTypeMapping TypeName="BaseModel.Estatus">
+              <MappingFragment StoreEntitySet="Estatus">
+                <ScalarProperty Name="idEstatus" ColumnName="idEstatus" />
+                <ScalarProperty Name="idConcepto" ColumnName="idConcepto" />
+                <ScalarProperty Name="ClaveInterna" ColumnName="ClaveInterna" />
+                <ScalarProperty Name="ClaveExterna" ColumnName="ClaveExterna" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametros">
+            <EntityTypeMapping TypeName="BaseModel.Parametros">
+              <MappingFragment StoreEntitySet="Parametros">
+                <ScalarProperty Name="idParametro" ColumnName="idParametro" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="BaseModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="InformacionContacto" ColumnName="InformacionContacto" />
+                <ScalarProperty Name="CuentaActiva" ColumnName="CuentaActiva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="BaseModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="BaseModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="BaseModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="Usuarios">
+              <ScalarProperty Name="idUsuario" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="webpages_Acciones">
+            <EntityTypeMapping TypeName="BaseModel.webpages_Acciones">
+              <MappingFragment StoreEntitySet="webpages_Acciones">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idAccion" ColumnName="idAccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_AccionesInRoles" TypeName="BaseModel.webpages_AccionesInRoles" StoreEntitySet="webpages_AccionesInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="idRole" />
+            </EndProperty>
+            <EndProperty Name="webpages_Acciones">
+              <ScalarProperty Name="idAccion" ColumnName="idAccion" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="webpages_Roles_Admin_Users" TypeName="BaseModel.webpages_Roles_Admin_Users" StoreEntitySet="webpages_Roles_Admin_Users">
+            <EndProperty Name="webpages_Roles1">
+              <ScalarProperty Name="RoleId" ColumnName="idRoleMain" />
+            </EndProperty>
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="idRole" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Ruta">
+            <EntityTypeMapping TypeName="BaseModel.Ruta">
+              <MappingFragment StoreEntitySet="Ruta">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="idRuta" ColumnName="idRuta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RutaCheckpoint">
+            <EntityTypeMapping TypeName="BaseModel.RutaCheckpoint">
+              <MappingFragment StoreEntitySet="RutaCheckpoint">
+                <ScalarProperty Name="Salida" ColumnName="Salida" />
+                <ScalarProperty Name="Llegada" ColumnName="Llegada" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Lugar" ColumnName="Lugar" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="idRuta" ColumnName="idRuta" />
+                <ScalarProperty Name="idRutaCheckPoint" ColumnName="idRutaCheckPoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RutaUsuarios" TypeName="BaseModel.RutaUsuarios" StoreEntitySet="RutaUsuarios">
+            <EndProperty Name="Usuarios">
+              <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+            </EndProperty>
+            <EndProperty Name="Ruta">
+              <ScalarProperty Name="idRuta" ColumnName="idRuta" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Grupo">
+            <EntityTypeMapping TypeName="BaseModel.Grupo">
+              <MappingFragment StoreEntitySet="Grupo">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="GrupoMiembros" TypeName="BaseModel.GrupoMiembros" StoreEntitySet="GrupoMiembros">
+            <EndProperty Name="Usuarios">
+              <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+            </EndProperty>
+            <EndProperty Name="Grupo">
+              <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="RutaGrupos" TypeName="BaseModel.RutaGrupos" StoreEntitySet="RutaGrupos">
+            <EndProperty Name="Ruta">
+              <ScalarProperty Name="idRuta" ColumnName="idRuta" />
+            </EndProperty>
+            <EndProperty Name="Grupo">
+              <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="CheckIn">
+            <EntityTypeMapping TypeName="BaseModel.CheckIn">
+              <MappingFragment StoreEntitySet="CheckIn">
+                <ScalarProperty Name="EsEntrada" ColumnName="EsEntrada" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Longitud" ColumnName="Longitud" />
+                <ScalarProperty Name="Latitud" ColumnName="Latitud" />
+                <ScalarProperty Name="idCheckpoint" ColumnName="idCheckpoint" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idCheckin" ColumnName="idCheckin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forma">
+            <EntityTypeMapping TypeName="BaseModel.Forma">
+              <MappingFragment StoreEntitySet="Forma">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdForma" ColumnName="IdForma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormaPregunta">
+            <EntityTypeMapping TypeName="BaseModel.FormaPregunta">
+              <MappingFragment StoreEntitySet="FormaPregunta">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
+                <ScalarProperty Name="idForma" ColumnName="idForma" />
+                <ScalarProperty Name="idFormaPregunta" ColumnName="idFormaPregunta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormaPreguntaOpcion">
+            <EntityTypeMapping TypeName="BaseModel.FormaPreguntaOpcion">
+              <MappingFragment StoreEntitySet="FormaPreguntaOpcion">
+                <ScalarProperty Name="Opcion" ColumnName="Opcion" />
+                <ScalarProperty Name="idFormaPregunta" ColumnName="idFormaPregunta" />
+                <ScalarProperty Name="idFormaPreguntaOpcion" ColumnName="idFormaPreguntaOpcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="RutaForma" TypeName="BaseModel.RutaForma" StoreEntitySet="RutaForma">
+            <EndProperty Name="Ruta">
+              <ScalarProperty Name="idRuta" ColumnName="idRuta" />
+            </EndProperty>
+            <EndProperty Name="Forma">
+              <ScalarProperty Name="IdForma" ColumnName="idForma" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Conversacion">
+            <EntityTypeMapping TypeName="BaseModel.Conversacion">
+              <MappingFragment StoreEntitySet="Conversacion">
+                <ScalarProperty Name="UltimoFecha" ColumnName="UltimoFecha" />
+                <ScalarProperty Name="UltimoMensaje" ColumnName="UltimoMensaje" />
+                <ScalarProperty Name="Grupal" ColumnName="Grupal" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idUsuarioInvitado" ColumnName="idUsuarioInvitado" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="idConversacion" ColumnName="idConversacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mensaje">
+            <EntityTypeMapping TypeName="BaseModel.Mensaje">
+              <MappingFragment StoreEntitySet="Mensaje">
+                <ScalarProperty Name="Visto" ColumnName="Visto" />
+                <ScalarProperty Name="FechaVisto" ColumnName="FechaVisto" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Mensaje1" ColumnName="Mensaje" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idConversacion" ColumnName="idConversacion" />
+                <ScalarProperty Name="idMensaje" ColumnName="idMensaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VistaGrupo">
+            <EntityTypeMapping TypeName="BaseModel.VistaGrupo">
+              <MappingFragment StoreEntitySet="VistaGrupo">
+                <ScalarProperty Name="FechaVisto" ColumnName="FechaVisto" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idMensaje" ColumnName="idMensaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ConversacionUsuarios" TypeName="BaseModel.ConversacionUsuarios" StoreEntitySet="ConversacionUsuarios">
+            <EndProperty Name="Conversacion">
+              <ScalarProperty Name="idConversacion" ColumnName="idConversacion" />
+            </EndProperty>
+            <EndProperty Name="Usuarios">
+              <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="FormaRespuesta">
+            <EntityTypeMapping TypeName="BaseModel.FormaRespuesta">
+              <MappingFragment StoreEntitySet="FormaRespuesta">
+                <ScalarProperty Name="idRutaCheckpoint" ColumnName="idRutaCheckpoint" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idForma" ColumnName="idForma" />
+                <ScalarProperty Name="idFormaRespuesta" ColumnName="idFormaRespuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormaRespuestaDetalle">
+            <EntityTypeMapping TypeName="BaseModel.FormaRespuestaDetalle">
+              <MappingFragment StoreEntitySet="FormaRespuestaDetalle">
+                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+                <ScalarProperty Name="idFormaPreguntaOpcion" ColumnName="idFormaPreguntaOpcion" />
+                <ScalarProperty Name="idFormaPregunta" ColumnName="idFormaPregunta" />
+                <ScalarProperty Name="idFormaRespuesta" ColumnName="idFormaRespuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormaRespuestaDetalle2">
+            <EntityTypeMapping TypeName="BaseModel.FormaRespuestaDetalle2">
+              <MappingFragment StoreEntitySet="FormaRespuestaDetalle2">
+                <ScalarProperty Name="idFormaPreguntaOpcion" ColumnName="idFormaPreguntaOpcion" />
+                <ScalarProperty Name="idFormaPregunta" ColumnName="idFormaPregunta" />
+                <ScalarProperty Name="idFormaRespuesta" ColumnName="idFormaRespuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoNoticia">
+            <EntityTypeMapping TypeName="BaseModel.TipoNoticia">
+              <MappingFragment StoreEntitySet="TipoNoticia">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="idTipoNoticia" ColumnName="idTipoNoticia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Noticias">
+            <EntityTypeMapping TypeName="BaseModel.Noticias">
+              <MappingFragment StoreEntitySet="Noticias">
+                <ScalarProperty Name="Activa" ColumnName="Activa" />
+                <ScalarProperty Name="idTipoNoticia" ColumnName="idTipoNoticia" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="idNoticia" ColumnName="idNoticia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapacitacionTema">
+            <EntityTypeMapping TypeName="BaseModel.CapacitacionTema">
+              <MappingFragment StoreEntitySet="CapacitacionTema">
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="idCapacitacion" ColumnName="idCapacitacion" />
+                <ScalarProperty Name="idTemaCapacitacion" ColumnName="idTemaCapacitacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapacitacionVisitas">
+            <EntityTypeMapping TypeName="BaseModel.CapacitacionVisitas">
+              <MappingFragment StoreEntitySet="CapacitacionVisitas">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idCapacitacionArchivos" ColumnName="idCapacitacionArchivos" />
+                <ScalarProperty Name="FechaVisita" ColumnName="FechaVisita" />
+                <ScalarProperty Name="idCapacitacionVisitas" ColumnName="idCapacitacionVisitas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CapacitacionArchivos">
+            <EntityTypeMapping TypeName="BaseModel.CapacitacionArchivos">
+              <MappingFragment StoreEntitySet="CapacitacionArchivos">
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="idTemaCapacitacion" ColumnName="idTemaCapacitacion" />
+                <ScalarProperty Name="idCapacitacionArchivos" ColumnName="idCapacitacionArchivos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Capacitacion">
+            <EntityTypeMapping TypeName="BaseModel.Capacitacion">
+              <MappingFragment StoreEntitySet="Capacitacion">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NombreCapacitacion" ColumnName="NombreCapacitacion" />
+                <ScalarProperty Name="idCapacitacion" ColumnName="idCapacitacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CapacitacionGrupo" TypeName="BaseModel.CapacitacionGrupo" StoreEntitySet="CapacitacionGrupo">
+            <EndProperty Name="Grupo">
+              <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+            </EndProperty>
+            <EndProperty Name="Capacitacion">
+              <ScalarProperty Name="idCapacitacion" ColumnName="idCapacitacion" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Notificaciones">
+            <EntityTypeMapping TypeName="BaseModel.Notificaciones">
+              <MappingFragment StoreEntitySet="Notificaciones">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="idNotificacion" ColumnName="idNotificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="BaseModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="BaseModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="NoticiasGrupo" TypeName="BaseModel.NoticiasGrupo" StoreEntitySet="NoticiasGrupo">
+            <EndProperty Name="Noticias">
+              <ScalarProperty Name="idNoticia" ColumnName="idNoticia" />
+            </EndProperty>
+            <EndProperty Name="Grupo">
+              <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="UsuariosAcceso">
+            <EntityTypeMapping TypeName="BaseModel.UsuariosAcceso">
+              <MappingFragment StoreEntitySet="UsuariosAcceso">
+                <ScalarProperty Name="fechaAutorización" ColumnName="fechaAutorización" />
+                <ScalarProperty Name="idUserAutoriza" ColumnName="idUserAutoriza" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idUsuariosAcceso" ColumnName="idUsuariosAcceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

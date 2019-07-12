@@ -1,0 +1,21 @@
+﻿@model MvcFlash.Core.Messages.SimpleMessage
+@{
+    String typeMessage = Model.MessageType;
+    if (Model.MessageType == "error")
+    {
+        typeMessage = "danger";
+    }
+}
+
+<div class="alert-wrap in">
+    <div class="alert alert-@typeMessage" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times-circle"></i></button>
+        <div class="media">
+            <strong>@Model.Title</strong> @Model.Content
+            @if (Model.Data != null)
+            {
+                @Html.DisplayFor(m => m.Data)
+            }
+        </div>
+    </div>
+</div>
