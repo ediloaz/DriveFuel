@@ -113,7 +113,7 @@
 		<div class="row text-right">
 			<span class="btn btn-danger" @@click="cancel">Cancelar</span>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<span class="btn btn-success" @@click="save">Guardar</span>
+			<span class="btn btn-success" @@click="save">Guardar</span> 
 		</div>
 	</div>
 </div>
