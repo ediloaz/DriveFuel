@@ -148,6 +148,7 @@
     <div Class="row">
         @*Actividad Reciente*@
         <div Class="col-sm-12 col-md-7">
+            <center><h3><b>Actividad reciente</b></h3></center>
             <div Class="table-responsive">
                 <Table Class="table m-b-0">
                     <tbody>
@@ -176,18 +177,23 @@
             </div>
         </div>
         @*Notificacion masiva*@
-        <div Class="col-sm-12 col-md-5 bg-white border-danger">
-            <div Class="form-group">
+        <div Class="col-sm-12 col-md-5 ">
+            <center><h3><b>Notificaciones</b></h3></center>
+            
+            <div Class="form-group bg-white border-danger" style="overflow:auto">
+
                 <div Class="col-sm-12 p-t m-t-md">
-                    <Label Class="control-label" style="">Enviar notificación a usuarios</Label>
+                    <center>
+                        <Label Class="control-label" style="">Enviar notificación a usuarios</Label>
+                    </center>
                 </div>
                 <div Class="col-sm-12 p-t">
 
-                    <Button type="button" Class="btn btn-default" data-toggle="dropdown" aria-expanded="false" id="grupo">
+                    <Button type="button" style="width:100%" Class="btn btn-default" data-toggle="dropdown" aria-expanded="false" id="grupo">
                         <span id="textoGrupo"> Selecciona grupo de usuarios </span>
                         <span Class="caret"></span>
                     </Button>
-                    <ul Class="dropdown-menu">
+                    <ul Class="dropdown-menu" style="text-align:center ; width:100%">
                         @For Each _grupo In Model.Grupos
                             @<li class="opcionesGrupo" data-item="@_grupo.Descripcion" data-idgrupo="@_grupo.idGrupo">
                                 <a href="javascript:;">@_grupo.Descripcion</a>
@@ -200,7 +206,7 @@
                 </div>
                 <div class="col-sm-12 p-t m-b-md">
                     <center>
-                        <button class="btn btn-success" style="width:80%" type="button" id="notifica_envio">Enviar</button>
+                        <button class="btn btn-success" style="width:100%" type="button" id="notifica_envio">Enviar</button>
                     </center>
                 </div>
             </div>

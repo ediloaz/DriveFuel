@@ -161,3 +161,4 @@ RecepcionFacturas/Content/Uploads/Retenciones*/
 
 RecepcionFacturas/Content/sapui
 *.sublime*
+/.vs/MVC4Base/v15/Server/sqlite3/db.lock

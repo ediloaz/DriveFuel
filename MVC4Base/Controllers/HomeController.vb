@@ -14,10 +14,11 @@ Public Class HomeController
         Dim result
         If Roles.IsUserInRole(WebSecurity.CurrentUserName, "SuperAdmin") Then
             l_grupos = db.Grupo.ToList
+            model.Grupos = l_grupos
         ElseIf Roles.IsUserInRole(WebSecurity.CurrentUserName, "Cliente") Then
             l_grupos = db.Grupo.Include("Usuarios").ToList
             result = l_grupos.Where(Function(x) x.Usuarios.Where(Function(y) y.Correo.Contains(User.Identity.Name)).Count > 0).ToList
-
+            model.Grupos = result
             'l_grupos = db.Grupo.Include("Usuarios").Select(Function(x) x.Usuarios.Where(Function(y) User.Identity.Name = y.Nombre))
         Else
             Dim Ids_ClientesPermitidos = UsuariosAccesoController.ObtenerClientesPermitidos(WebSecurity.CurrentUserId)
@@ -26,8 +27,9 @@ Public Class HomeController
                 Ids_ProductosPermitidos.AddRange(UsuariosAccesoController.ObtenerProductosPermitidos(WebSecurity.CurrentUserId, idCliente))
             Next
             l_grupos = db.Grupo.Where(Function(x) Ids_ProductosPermitidos.Contains(x.idProducto)).ToList
+            model.Grupos = l_grupos
         End If
-        model.Grupos = result
+
         Return model
     End Function
 

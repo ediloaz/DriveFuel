@@ -1,86 +1,318 @@
-﻿@ModelType MVC4Base.Ruta
+﻿@ModelType MVC4Base.Reporte
+@imports MVC4Base
 
 @Code
-    ViewData("Title") = "Details"
+    If ViewBag.esPdf Then
+        Layout = "~/Views/Shared/_Layout.vbhtml"
+    End If
 End Code
 
-<style>
-  .circulo{
-    border: 5px solid #8ba73a;
-    border-radius: 50%;
-    padding: 35px;
-    width: 20px;
-    height: 20px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .scores > div { 
-  	text-align: center;
-  }
-  .scores > div > div { 
-  	margin-left: auto;
-  	margin-right: auto;
-  }
-  .card-title > h5 { 
-  	text-align: center;
-  }
-  .score{
-    font-weight: 900;
-    font-size: 20px;
-  }
-  .bg-ficha{
-    background-color: #e9e9ea;
-  }
-</style>
+@Section Styles
+    <style>
+        li.bg-grey {
+            background-color: #F0F0F0 !important;
+        }
 
-<div class="card card-block bg-white no-border" style="overflow: hidden;">
-    @For Each item In Model.Grupo
-        @<div class="col-sm-12 col-md-6">
-    <div class="card-block bg-ficha">
-      <h4 class="card-title">Zona: @item.Descripcion</h4>
-      <h4 class="card-title">Fecha: @item.Llegada.ToLongDateString - @item.Salida.ToLongDateString</h4>
-      <div class="row scores" style="margin-top: 25px"><!--******Circulos**********-->
-        <div class="col-sm-3">
-          <div class="score circulo">@item.CheckinPorcentaje%</div>
-        </div>
-        <div class="col-sm-3 ">
-          <div class="score circulo">@item.Faltantes%</div>
-        </div>
-        <div class="col-sm-3 ">
-          <div class="score circulo">@item.Cuestionarios</div>
-        </div>
-        <div class="col-sm-3 ">
-          <div class="score circulo">@item.PromotoresActivos</div>
-        </div>
-      </div>
-      <div class="row"> <!--******Etiquetas**********-->
-        <div class="col-sm-3">
-          <div class="card-title" style="padding-left: 8px;"><h5>Check-in</h5></div>
-        </div>
-        <div class="col-sm-3">
-          <div class="card-title" style="padding-left: 8px;"><h5>Faltantes</h5></div>
-        </div>
-        <div class="col-sm-3">
-          <div class="card-title"><h5>Cuestionarios capturados</h5></div>
-        </div>
-        <div class="col-sm-3">
-          <div class="card-title"><h5>Promotores Activos</h5></div>
-        </div>
-      </div>
-      <div class="row" style="margin-top: 25px">
-        <div class="col-sm-5" style="padding-top: 10px;">
-          <h6 class="card-title">Fotografias capturadas: @item.Fotos</h6>
-        </div>
-        <div class="col-sm-7 text-right">
-            <a href="?excel=1" target="_blank" class="btn btn-dark">Exportar a Excel</a>
-            <a href="?pdf=1" target="_blank" class="btn btn-dark">Exportar a PDF</a>
-            @Html.ActionLink("Ver Detalle", "RutaGrupo", New With {.id = Model.idRuta, .id2 = item.idGrupo}, New With {.class = "btn btn-success"})
-        </div>
-      </div>
-    </div>
-  </div>
-    Next
+        .badge-info {
+            background-color: #17A2B8 !important;
+        }
+
+        .badge-green {
+            background-color: #28A745 !important;
+        }
+
+        .badge-red {
+            background-color: #DC3545 !important;
+        }
+    </style>
+End Section
+
+<left>
+    <h2>Reporte de actividades</h2>
+    <p class="" style="font-size:1.2em">Generado por <b>@ViewBag.UsuarioActual</b></p>
+    <a href="?excel=1" target="_blank" class="btn btn-lg btn-success bg-green-light text-white" style="border-radius: .25rem">Exportar datos a excel</a>
+</left>
+
+
+
+
+<center class="m-t p-t">
+    <h3><b>Información General</b></h3>
+</center>
+<div class="row m-t p-t">
+    <ul class="list-group list-group-flush">
+        <li class="bg-grey list-group-item">Cliente: <strong> @ViewBag.Cliente </strong></li>
+        <li class="bg-grey list-group-item">Producto: <strong> @ViewBag.Producto </strong></li>
+        <li class="bg-grey list-group-item">Ruta: <strong> @ViewBag.Ruta </strong></li>
+        <li class="bg-grey list-group-item">Periodo: <strong> @ViewBag.Llegada.ToLongDateString - @ViewBag.Salida.ToLongDateString </strong></li>
+    </ul>
 </div>
+
+
+
+
+<center class="m-t p-t">
+    <h3><b>Datos estadísticos</b></h3>
+</center>
+<div class="row m-t p-t">
+    <ul class="list-group list-group-flush">
+        <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
+            Checkpoints
+            <span class="badge badge-primary badge-pill badge-info">
+                @ViewBag.CheckPoints
+            </span>
+        </li>
+        <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
+            Promotores
+            <span class="badge badge-primary badge-pill badge-info">
+                @ViewBag.Promotores
+            </span>
+        </li>
+        <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
+            Asistencias
+            <span class="badge badge-primary badge-pill badge-info">
+                @ViewBag.Asistencias
+            </span>
+        </li>
+        <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
+            Faltas
+            <span class="badge badge-primary badge-pill badge-info">
+                @ViewBag.Faltas
+            </span>
+        </li>
+        <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
+            Formularios
+            <span class="badge badge-primary badge-pill badge-info">
+                @ViewBag.Formularios
+            </span>
+        </li>
+        <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
+            Imágenes
+            <span class="badge badge-primary badge-pill badge-info">
+                @ViewBag.Imagenes
+            </span>
+        </li>
+    </ul>
+</div>
+
+
+
+<center class="m-t p-t">
+    <h3><b>Checkpoints</b></h3>
+</center>
+<div class="row m-t p-t">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped datatable m-b-0">
+            <thead class="text-white bold" style="background:#01A93A">
+                <tr>
+                    <th>#</th>
+                    <th>Dirección</th>
+                    <th>Checkpoint</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @Code Dim contador = 0 End Code
+                @For Each checkpoint In ViewBag.respuestas
+                    Dim checkPointName As String = checkpoint.Descripcion
+                    Dim direccion As String = checkpoint.Lugar
+                    contador += 1
+                    @<tr>
+                        <td>
+                            @contador
+                        </td>
+                        <td>
+                            @direccion
+                        </td>
+                        <td>
+                            @checkPointName
+                        </td>
+                    </tr>
+                Next
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<center class="m-t p-t">
+    <h3><b>Promotores</b></h3>
+    <span></span>
+</center>
+<div class="row m-t p-t">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped datatable m-b-0">
+            <thead class="text-white bold" style="background:#01A93A">
+                <tr>
+                    <th>Promotor</th>
+                    <th>Grupo</th>
+                    <th>Check-In</th>
+                    <th>Faltas</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @For Each usuario In ViewBag.ListaPromotores
+                    Dim promotor_nombre As String = usuario.Nombre
+                    Dim Asistencias As String = usuario.Checkins
+                    Dim Faltas As String = usuario.Faltas
+                    @<tr>
+                        <td>
+                            @promotor_nombre
+                        </td>
+                        <td>
+                            @usuario.Correo
+                        </td>
+                        <td>
+                            <span class="badge badge-green badge-pill ">
+                                @usuario.Checkins
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-red badge-pill ">
+                                @usuario.Faltas
+                            </span>
+                        </td>
+                    </tr>
+                Next
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<center class="m-t p-t">
+    <h3><b>Asistencias</b></h3>
+    <span>Usuarios que han realizado su check-in</span>
+</center>
+<div class="row m-t p-t">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped datatable m-b-0">
+            <thead class="text-white bold" style="background:#01A93A">
+                <tr>
+                    <th>Promotor</th>
+                    <th>Grupo</th>
+                    <th>Check-In</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @For Each usuario In ViewBag.ListaPromotores
+                    Dim promotor_nombre As String = usuario.Nombre
+                    Dim Asistencias As String = usuario.Checkins
+                    Dim Faltas As String = usuario.Faltas
+                    If Asistencias <> "0" Then
+                        @<tr>
+                            <td>
+                                @promotor_nombre
+                            </td>
+                            <td>
+                                @usuario.Correo
+                            </td>
+                            <td style="width:10%">
+                                <center>
+                                    <i class="icon-check text-green"></i>
+                                </center>
+                            </td>
+                        </tr>
+                    End If
+
+                Next
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<center class="m-t p-t">
+    <h3><b>Ausencias</b></h3>
+    <span>Usuarios que <b>no</b> han realizado su check-in</span>
+</center>
+<div class="row m-t p-t">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped datatable m-b-0">
+            <thead class="text-white bold" style="background:#DC3545">
+                <tr>
+                    <th>Promotor</th>
+                    <th>Grupo</th>
+                    <th>Check-In</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @For Each usuario In ViewBag.ListaPromotores
+                    Dim promotor_nombre As String = usuario.Nombre
+                    Dim Asistencias As String = usuario.Checkins
+                    Dim Faltas As String = usuario.Faltas
+                    If Faltas <> "0" Then
+                        @<tr>
+                            <td>
+                                @promotor_nombre
+                            </td>
+                            <td>
+                                @usuario.Correo
+                            </td>
+                            <td style="width:10%">
+                                <center>
+                                    <i class="icon-close text-red"></i>
+                                </center>
+                            </td>
+                        </tr>
+                    End If
+
+                Next
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+<center class="m-t p-t">
+    <h3><b>Fotografías Cargadas Recientemente</b></h3>
+    <span></span>
+</center>
+<div class="row m-t p-t">
+    @For Each foto In ViewBag.UltimasFotos
+        @<div class="col-sm-12 col-md-4" style="padding:0 50px">
+            <img class="img-thumbnail img-responsive" style="width:96% ; padding:10px 2%" src="@foto" />
+        </div>
+    Next
+
+</div>
+
+
+
+
+
+<center class="m-t p-t">
+    <h3> <b> Formularios</b></h3>
+    <span> Últimos cargados por <b>@ViewBag.UsuarioActual</b></span>
+</center>
+<div class="row m-t p-t">
+    <div class="row">
+        @For Each cuestionario In Model.Cuestionarios
+            @<div class="col-sm-12 col-md-4">
+                <div class="card" style="    padding: 20px 40px;">
+                    <div class="card-body">
+                        <h4 class="card-title"><b>@cuestionario.Nombre</b></h4>
+                        <h5 class="card-subtitle mb-2 text-muted">@cuestionario.Fecha</h5>
+                    </div>
+                </div>
+            </div>
+        Next
+    </div>
+</div>
+

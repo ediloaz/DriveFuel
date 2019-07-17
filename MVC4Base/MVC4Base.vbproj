@@ -397,6 +397,7 @@
     <Compile Include="Models\ViewModels\InactividadViewModel.vb" />
     <Compile Include="Models\ViewModels\LoginViewModel.vb" />
     <Compile Include="Models\Metadata\NoticiasMetadata.vb" />
+    <Compile Include="Models\ViewModels\Reporte.vb" />
     <Compile Include="Models\ViewModels\UsuarioInfoViewModel.vb" />
     <Compile Include="Models\ViewModels\UsuariosGruposApiViewModel.vb" />
     <Compile Include="Models\VistaGrupo.vb">
@@ -848,6 +849,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\PublishProfiles\Fuel.pubxml" />
+    <None Include="My Project\PublishProfiles\MVC4Base-dev-as - Web Deploy.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
