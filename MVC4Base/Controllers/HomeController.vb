@@ -9,6 +9,17 @@ Public Class HomeController
 
     Private db As New BaseEntities
 
+    Function GetRoleUsuarioActual() As String
+        Dim respuesta = "False"
+        If Roles.IsUserInRole(WebSecurity.CurrentUserName, "Cliente") Then
+            respuesta = "True"
+        End If
+        'If (db.Usuarios.Where(Function(u) u.Correo = User.Identity.Name And u.webpages_Roles.Where(Function(r) r.Description = "Cliente").Count > 0).Count > 0) Then
+        '    respuesta = "True"
+        'End If
+        Return respuesta
+    End Function
+
     Function GetNotificacionMasiva(ByVal model As DashboardViewModel) As DashboardViewModel
         Dim l_grupos As New List(Of Grupo)
         Dim result

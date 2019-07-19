@@ -872,6 +872,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\PublishProfiles\FolderProfile.pubxml" />
     <None Include="My Project\PublishProfiles\Fuel.pubxml" />
     <None Include="My Project\PublishProfiles\MVC4Base-dev-as - Web Deploy.pubxml" />
     <None Include="My Project\Settings.settings">

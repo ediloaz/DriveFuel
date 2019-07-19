@@ -1,0 +1,9 @@
+﻿form .form-text
+{
+    font-size: .77em;
+}
+.validation-summary-errors ul
+{
+    font-size: .77em;
+    list-style: none;
+}
