@@ -10,6 +10,9 @@
 
     @Styles.Render("~/Content/template")
     @Styles.Render("~/Content/base")
+    <base href="C:\Users\edilo\Google Drive\Work\Freelancer\Projects & Jobs\Desarrollo en .NET - Terminar sistema\Proyecto\DriveFuel\">
+    <link href="MVC4Base\Content\Site.css" rel="stylesheet">
+    <link href="MVC4Base\Content\bootstrap.css" rel="stylesheet">
 
     @RenderSection("styles", required:=False)
 

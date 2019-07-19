@@ -3,7 +3,7 @@
 
 @Code
     If ViewBag.esPdf Then
-        Layout = "~/Views/Shared/_Layout.vbhtml"
+        Layout = "~/Views/Shared/_LayoutEmpty.vbhtml"
     End If
 End Code
 
@@ -29,7 +29,7 @@ End Section
 
 <left>
     <h2>Reporte de actividades</h2>
-    <p class="" style="font-size:1.2em">Generado por <b>@ViewBag.UsuarioActual</b></p>
+    <p class="" style="font-size:1.2em">Generado por <b>@Model.UsuarioSolicitante</b></p>
     <a href="?excel=1" target="_blank" class="btn btn-lg btn-success bg-green-light text-white" style="border-radius: .25rem">Exportar datos a excel</a>
 </left>
 
@@ -41,10 +41,10 @@ End Section
 </center>
 <div class="row m-t p-t">
     <ul class="list-group list-group-flush">
-        <li class="bg-grey list-group-item">Cliente: <strong> @ViewBag.Cliente </strong></li>
-        <li class="bg-grey list-group-item">Producto: <strong> @ViewBag.Producto </strong></li>
-        <li class="bg-grey list-group-item">Ruta: <strong> @ViewBag.Ruta </strong></li>
-        <li class="bg-grey list-group-item">Periodo: <strong> @ViewBag.Llegada.ToLongDateString - @ViewBag.Salida.ToLongDateString </strong></li>
+        <li class="bg-grey list-group-item">Cliente: <strong> @Model.Cliente </strong></li>
+        <li class="bg-grey list-group-item">Producto: <strong> @Model.Producto </strong></li>
+        <li class="bg-grey list-group-item">Ruta: <strong> @Model.Ruta </strong></li>
+        <li class="bg-grey list-group-item">Periodo: <strong> @Model.FechaInicio - @Model.FechaFinal </strong></li>
     </ul>
 </div>
 
@@ -59,37 +59,37 @@ End Section
         <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
             Checkpoints
             <span class="badge badge-primary badge-pill badge-info">
-                @ViewBag.CheckPoints
+                @Model.CantidadCheckPoints
             </span>
         </li>
         <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
             Promotores
             <span class="badge badge-primary badge-pill badge-info">
-                @ViewBag.Promotores
+                @Model.CantidadPromotores
             </span>
         </li>
         <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
             Asistencias
             <span class="badge badge-primary badge-pill badge-info">
-                @ViewBag.Asistencias
+                @Model.CantidadAsistencias
             </span>
         </li>
         <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
             Faltas
             <span class="badge badge-primary badge-pill badge-info">
-                @ViewBag.Faltas
+                @Model.CantidadAusencias
             </span>
         </li>
         <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
             Formularios
             <span class="badge badge-primary badge-pill badge-info">
-                @ViewBag.Formularios
+                @Model.CantidadFormularios
             </span>
         </li>
         <li class="bg-grey list-group-item d-flex justify-content-between align-items-center">
             Imágenes
             <span class="badge badge-primary badge-pill badge-info">
-                @ViewBag.Imagenes
+                @Model.CantidadImagenes
             </span>
         </li>
     </ul>
@@ -113,7 +113,7 @@ End Section
             <tbody>
 
                 @Code Dim contador = 0 End Code
-                @For Each checkpoint In ViewBag.respuestas
+                @For Each checkpoint In ViewBag.CheckPoints
                     Dim checkPointName As String = checkpoint.Descripcion
                     Dim direccion As String = checkpoint.Lugar
                     contador += 1
@@ -154,7 +154,7 @@ End Section
             </thead>
             <tbody>
 
-                @For Each usuario In ViewBag.ListaPromotores
+                @For Each usuario In Model.Promotores
                     Dim promotor_nombre As String = usuario.Nombre
                     Dim Asistencias As String = usuario.Checkins
                     Dim Faltas As String = usuario.Faltas
@@ -202,7 +202,7 @@ End Section
             </thead>
             <tbody>
 
-                @For Each usuario In ViewBag.ListaPromotores
+                @For Each usuario In Model.Promotores
                     Dim promotor_nombre As String = usuario.Nombre
                     Dim Asistencias As String = usuario.Checkins
                     Dim Faltas As String = usuario.Faltas
@@ -248,7 +248,7 @@ End Section
             </thead>
             <tbody>
 
-                @For Each usuario In ViewBag.ListaPromotores
+                @For Each usuario In Model.Promotores
                     Dim promotor_nombre As String = usuario.Nombre
                     Dim Asistencias As String = usuario.Checkins
                     Dim Faltas As String = usuario.Faltas
@@ -285,10 +285,12 @@ End Section
     <span></span>
 </center>
 <div class="row m-t p-t">
-    @For Each foto In ViewBag.UltimasFotos
+    @For Each foto In Model.Imagenes
         @<div class="col-sm-12 col-md-4" style="padding:0 50px">
-            <img class="img-thumbnail img-responsive" style="width:96% ; padding:10px 2%" src="@foto" />
-        </div>
+             <center>
+                 <img style="max-height:220px" class="img-thumbnail img-responsive" style="width:96% ; padding:10px 2%" src="@foto" />
+             </center>
+         </div>
     Next
 
 </div>
@@ -299,7 +301,7 @@ End Section
 
 <center class="m-t p-t">
     <h3> <b> Formularios</b></h3>
-    <span> Últimos cargados por <b>@ViewBag.UsuarioActual</b></span>
+    <span> Últimos cargados por <b>@Model.UsuarioSolicitante</b></span>
 </center>
 <div class="row m-t p-t">
     <div class="row">
