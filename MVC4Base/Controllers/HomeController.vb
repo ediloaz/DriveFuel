@@ -100,7 +100,7 @@ Public Class HomeController
     End Function
 
     Function GetRutas(ByVal model As DashboardViewModel) As DashboardViewModel
-        model.Rutas = (From r In db.Ruta.Include("RutaCheckpoint") Order By r.idRuta Descending).Take(7).ToList()
+        model.Rutas = (From r In db.Ruta.Include("RutaCheckpoint").Include("Grupo") Order By r.idRuta Descending).ToList()
         Return model
     End Function
 
@@ -196,7 +196,10 @@ Public Class HomeController
 
 
 
-
+        ViewBag.UsuarioActual = User.Identity.Name
+        If Roles.IsUserInRole(WebSecurity.CurrentUserName, "Cliente") Then
+            ViewBag.RoleActual = "Cliente"
+        End If
         Return View(model)
     End Function
 

@@ -28,17 +28,29 @@
                     <tbody>
                         @For Each item In Model.Rutas
                             Dim currentItem = item
-                            @<tr>
-                                <td>
-                                    @Html.DisplayFor(Function(modelItem) currentItem.Cliente.NombreCliente)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(Function(modelItem) currentItem.Producto.NombreProducto)
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("Checks", "Rutas", New With {.id = currentItem.idRuta})" class="btn btn-dark">@currentItem.Descripcion</a>
-                                </td>
-                            </tr>
+                            Dim saltar = 0
+                            For Each grupo In item.Grupo
+                                If (saltar = 1) Then
+                                    GoTo Siguiente
+                                End If
+                                For Each usuario In grupo.Usuarios
+                                    If (ViewBag.UsuarioActual.ToString.Contains(usuario.Correo)) Then
+                                        saltar = 1
+                                            @<tr>
+                                                <td>
+                                                    @Html.DisplayFor(Function(modelItem) currentItem.Cliente.NombreCliente)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(Function(modelItem) currentItem.Producto.NombreProducto)
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("Checks", "Rutas", New With {.id = currentItem.idRuta})" class="btn btn-dark">@currentItem.Descripcion</a>
+                                                </td>
+                                            </tr>
+                                    End If
+                                Next
+                            Next
+Siguiente:
                         Next
                     </tbody>
                 </table>
