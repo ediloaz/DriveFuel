@@ -30,39 +30,72 @@ End Code
                 <tbody>
                     @For Each item In Model
                         Dim currentItem = item
-                        @<tr>
-                            <td>
-                                @Html.DisplayFor(Function(modelItem) currentItem.Descripcion)
-                            </td>
-                            <td>@item.RutaCheckpoint.Count</td>
-                            <td>
-                                @Html.ActionLink("Checks", "Checks", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
-                                &nbsp;&nbsp;
-                                @Html.ActionLink("Formas", "RespuestasFormas", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
-                                &nbsp;&nbsp;
-                                @Html.ActionLink("Reporte", "Details", "Reportes", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
-                                &nbsp;&nbsp;
-                                @Html.ActionLink("Editar", "Edit", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
-                                &nbsp;&nbsp;
-                                @Html.ActionLink("Borrar", "Delete", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-danger"})
-                            </td>
-                        </tr>
+                        Dim saltar = 0
+                        If (ViewBag.RoleActual = "Cliente") Then
+                            For Each grupo In item.Grupo
+                                If (saltar = 1) Then
+                                    GoTo Siguiente
+                                End If
+                                For Each usuario In grupo.Usuarios
+                                    If (ViewBag.UsuarioActual.ToString.Contains(usuario.Correo)) Then
+                                        saltar = 1
+                                        @<tr>
+                                            <td>
+                                                @Html.DisplayFor(Function(modelItem) currentItem.Descripcion)
+                                            </td>
+                                            <td>@item.RutaCheckpoint.Count</td>
+                                            <td>
+                                                @Html.ActionLink("Checks", "Checks", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
+                                                &nbsp;&nbsp;
+                                                @Html.ActionLink("Formas", "RespuestasFormas", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
+                                                &nbsp;&nbsp;
+                                                @Html.ActionLink("Reporte", "Details", "Reportes", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
+                                                &nbsp;&nbsp;
+                                                @Html.ActionLink("Editar", "Edit", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
+                                                &nbsp;&nbsp;
+                                                @Html.ActionLink("Borrar", "Delete", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-danger"})
+                                            </td>
+                                        </tr>
+                                    End If
+                                Next
+                            Next
+Siguiente:
+                        Else
+                            @<tr>
+                                <td>
+                                    @Html.DisplayFor(Function(modelItem) currentItem.Descripcion)
+                                </td>
+                                <td>@item.RutaCheckpoint.Count</td>
+                                <td>
+                                    @Html.ActionLink("Checks", "Checks", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
+                                    &nbsp;&nbsp;
+                                    @Html.ActionLink("Formas", "RespuestasFormas", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
+                                    &nbsp;&nbsp;
+                                    @Html.ActionLink("Reporte", "Details", "Reportes", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
+                                    &nbsp;&nbsp;
+                                    @Html.ActionLink("Editar", "Edit", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-dark"})
+                                    &nbsp;&nbsp;
+                                    @Html.ActionLink("Borrar", "Delete", New With {.id = currentItem.idRuta}, New With {.class = "btn btn-danger"})
+                                </td>
+                            </tr>
+                        End If
+
                     Next
                 </tbody>
-            </table>
-        </div>
-    </div>
+                    </table>
+                </div>
+            </div>
 </div>
 
-@Section Styles
-    @Styles.Render("~/Content/datatable")
-End Section
+                @Section Styles
+                    @Styles.Render("~/Content/datatable")
+                End Section
 
-@Section Scripts
-    @Scripts.Render("~/bundles/datatable")
-    <script>
-        $(document).ready(function () {
-            $('.datatable').dataTable();
-        });
-    </script>
-End Section
+                @Section Scripts
+                    @Scripts.Render("~/bundles/datatable")
+                    <script>
+                        $(document).ready(function () {
+                            $('.datatable').dataTable();
+                        });
+                    </script>
+                End Section

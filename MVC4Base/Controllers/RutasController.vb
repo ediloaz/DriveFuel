@@ -11,7 +11,12 @@ Public Class RutasController
     ' GET: /Rutas/
 
     Function Index() As ActionResult
-        Return View((From r In db.Ruta.Include("RutaCheckpoint") Order By r.idRuta Descending).ToList())
+        ViewBag.UsuarioActual = User.Identity.Name
+        If Roles.IsUserInRole(WebSecurity.CurrentUserName, "Cliente") Then
+            ViewBag.RoleActual = "Cliente"
+        End If
+        Dim consulta = (From r In db.Ruta.Include("RutaCheckpoint").Include("Grupo") Order By r.idRuta Descending).Distinct.ToList()
+        Return View(consulta)
     End Function
 
     '
